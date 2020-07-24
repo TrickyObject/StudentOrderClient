@@ -9,7 +9,7 @@ public class StudentOrder {
 
     private long studentOrderId;
     private LocalDateTime studentOrderDate;
-    private StudentOrderStatus studentOrderStatus;
+//    private StudentOrderStatus studentOrderStatus;
     private Adult husband;
     private Adult wife;
     private List<Child> children;
@@ -25,13 +25,13 @@ public class StudentOrder {
         this.studentOrderDate = studentOrderDate;
     }
 
-    public StudentOrderStatus getStudentOrderStatus() {
-        return studentOrderStatus;
-    }
+//    public StudentOrderStatus getStudentOrderStatus() {
+//        return studentOrderStatus;
+//    }
 
-    public void setStudentOrderStatus(StudentOrderStatus studentOrderStatus) {
-        this.studentOrderStatus = studentOrderStatus;
-    }
+//    public void setStudentOrderStatus(StudentOrderStatus studentOrderStatus) {
+//        this.studentOrderStatus = studentOrderStatus;
+//    }
 
     public void addChild(Child child) {
         if(children == null) {
@@ -106,7 +106,7 @@ public class StudentOrder {
         return "StudentOrder{" +
                 "studentOrderId=" + studentOrderId +
                 ", studentOrderDate=" + studentOrderDate +
-                ", studentOrderStatus=" + studentOrderStatus +
+                ", studentOrderStatus=" + "Demo State" +
                 ", husband=" + husband +
                 ", wife=" + wife +
                 ", children=" + children +

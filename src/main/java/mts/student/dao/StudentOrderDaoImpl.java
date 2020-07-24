@@ -1,10 +1,11 @@
 package mts.student.dao;
 
-import mts.config.Config;
-import mts.domain.*;
-import mts.exception.DaoException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import com.sun.org.slf4j.internal.Logger;
+import com.sun.org.slf4j.internal.LoggerFactory;
+import mts.student.config.Config;
+import mts.student.domain.*;
+import mts.student.exception.DaoException;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -15,11 +16,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static mts.config.Config.DB_LIMIT;
+import static mts.student.config.Config.DB_LIMIT;
 
-public class StudentOrderDaoImpl implements mts.dao.StudentOrderDao {
+public class StudentOrderDaoImpl implements StudentOrderDao {
 
-    private static final Logger logger = LoggerFactory.getLogger(mts.dao.StudentOrderDaoImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(StudentOrderDaoImpl.class);
 
     private static final String INSERT_ORDER
             = "INSERT INTO jc_student_order(" +
@@ -238,10 +239,10 @@ public class StudentOrderDaoImpl implements mts.dao.StudentOrderDao {
     }
 
     private void setParamsForPerson(PreparedStatement ps, int start, Person person) throws SQLException {
-        ps.setString(start, person.getsName());
-        ps.setString(start + 1, person.getfName());
-        ps.setString(start + 2, person.getpName());
-        ps.setDate(start + 3, Date.valueOf(person.getBd()));
+        ps.setString(start, person.getSecondName());
+        ps.setString(start + 1, person.getFirstName());
+        ps.setString(start + 2, person.getPatronymicName());
+        ps.setDate(start + 3, Date.valueOf(person.getBirthDay()));
     }
 
     private void setParamsForAdress(PreparedStatement ps, int start, Person person) throws SQLException {
@@ -277,10 +278,10 @@ public class StudentOrderDaoImpl implements mts.dao.StudentOrderDao {
     private Adult fillAdult(ResultSet rs, String prefix) throws SQLException {
 
         Adult adult = new Adult();
-        adult.setsName(rs.getString(prefix + "sur_name"));
-        adult.setfName(rs.getString(prefix + "given_name"));
-        adult.setpName(rs.getString(prefix + "patronymic"));
-        adult.setBd(rs.getDate(prefix + "date_of_birth").toLocalDate());
+        adult.setSecondName(rs.getString(prefix + "sur_name"));
+        adult.setFirstName(rs.getString(prefix + "given_name"));
+        adult.setPatronymicName(rs.getString(prefix + "patronymic"));
+        adult.setBirthDay(rs.getDate(prefix + "date_of_birth").toLocalDate());
         adult.setPassportSerial(rs.getString(prefix + "passport_seria"));
         adult.setPassportNum(rs.getString(prefix + "passport_number"));
         adult.setPassportDate(rs.getDate(prefix + "passport_date").toLocalDate());
