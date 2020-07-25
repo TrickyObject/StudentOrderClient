@@ -1,7 +1,7 @@
 package mts.student.dao;
 
 
-import mts.student.domain.StudentOrder;
+import mts.student.domain.entity.StudentOrder;
 import mts.student.exception.DaoException;
 
 import java.util.List;

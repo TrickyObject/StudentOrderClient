@@ -1,4 +1,4 @@
-package mts.student.domain;
+package mts.student.domain.entity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

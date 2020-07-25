@@ -4,7 +4,7 @@ package mts.student.dao;
 import com.sun.org.slf4j.internal.Logger;
 import com.sun.org.slf4j.internal.LoggerFactory;
 import mts.student.config.Config;
-import mts.student.domain.*;
+import mts.student.domain.entity.*;
 import mts.student.exception.DaoException;
 
 import java.sql.*;
@@ -217,6 +217,7 @@ public class StudentOrderDaoImpl implements StudentOrderDao {
     }
 
 
+    // задание параметров
     private void setParamsForAdult(PreparedStatement ps, int start, Adult adult) throws SQLException {
         setParamsForPerson(ps, start, adult);
         ps.setString(start + 4,adult.getPassportSerial());
@@ -253,7 +254,6 @@ public class StudentOrderDaoImpl implements StudentOrderDao {
         ps.setString(start + 3, "");
         ps.setString(start + 4, adultAdress.getApartment());
     }
-
 
     private void fillStudentOrder(ResultSet rs, StudentOrder so) throws SQLException{
 
@@ -308,7 +308,6 @@ public class StudentOrderDaoImpl implements StudentOrderDao {
 
         return adult;
     }
-
 
     private Child fillChild(ResultSet rs) throws SQLException {
         String sName = rs.getString("c_sur_name");

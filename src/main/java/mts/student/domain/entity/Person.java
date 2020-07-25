@@ -1,11 +1,11 @@
-package mts.student.domain;
+package mts.student.domain.entity;
 
 import java.time.LocalDate;
 
 public abstract class Person {
 
     private String firstName;
-    private String secondName;
+    private String surName;
     private String patronymicName;
     private LocalDate birthDay;
     private Adress adress;
@@ -17,7 +17,7 @@ public abstract class Person {
 
     public Person(String firstName, String secondName, String patronymicName, LocalDate bd) {
         this.firstName = firstName;
-        this.secondName = secondName;
+        this.surName = secondName;
         this.patronymicName = patronymicName;
         this.birthDay = bd;
     }
@@ -26,7 +26,7 @@ public abstract class Person {
     public String toString() {
         return "Person{" +
                 "firstName='" + firstName + '\'' +
-                ", secondName='" + secondName + '\'' +
+                ", secondName='" + surName + '\'' +
                 ", patronymicName='" + patronymicName + '\'' +
                 ", birthDay=" + birthDay +
                 ", adress=" + adress +
@@ -42,11 +42,11 @@ public abstract class Person {
     }
 
     public String getSecondName() {
-        return secondName;
+        return surName;
     }
 
     public void setSecondName(String secondName) {
-        this.secondName = secondName;
+        this.surName = secondName;
     }
 
     public String getPatronymicName() {
