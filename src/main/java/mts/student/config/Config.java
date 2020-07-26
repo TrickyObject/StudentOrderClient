@@ -5,6 +5,7 @@ import java.util.Properties;
 
 public class Config {
 
+
     public static final String DB_URL = "db.url";
     public static final String DB_LOGIN = "db.login";
     public static final String DB_PWD = "db.password";

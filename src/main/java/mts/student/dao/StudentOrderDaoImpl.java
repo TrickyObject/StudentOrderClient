@@ -80,7 +80,8 @@ public class StudentOrderDaoImpl implements StudentOrderDao {
     private Connection getConnection() throws SQLException {
         return ConnectionBuilder.getConnection();
     }
-
+/*
+//  сохранение заявок
     @Override
     public Long saveStudentOrder(StudentOrder so) throws DaoException {
 
@@ -130,7 +131,7 @@ public class StudentOrderDaoImpl implements StudentOrderDao {
 
         return res;
     }
-
+*/
     @Override
     public List<StudentOrder> getStudentOrders() throws DaoException {
         return getStudentOrdersSingleSelect();
@@ -215,6 +216,7 @@ public class StudentOrderDaoImpl implements StudentOrderDao {
         so.setWife(fillAdult(rs, "w_"));
         return so;
     }
+
 
 
     // задание параметров
