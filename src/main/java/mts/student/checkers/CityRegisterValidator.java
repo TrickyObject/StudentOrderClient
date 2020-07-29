@@ -1,9 +1,10 @@
 package mts.student.checkers;
 
-
 import mts.student.domain.entity.Child;
 import mts.student.domain.entity.Person;
 import mts.student.domain.entity.StudentOrder;
+import mts.student.domain.register.city.AnswerCityRegister;
+import mts.student.domain.register.city.AnswerCityRegisterItem;
 import mts.student.domain.register.city.CityRegisterResponse;
 import mts.student.exception.CityRegException;
 
@@ -55,23 +56,6 @@ public class CityRegisterValidator {
         AnswerCityRegisterItem ans = new AnswerCityRegisterItem(state, person, error);
 
         return ans;
-//        return null;
+
     }
 }
-
-/*
-*
-            for (int i = 0; i < so.getChild().size(); i++) {
-                CityRegisterCheckerResponse ca = pChecker.checkPerson(so.getChild().get(i));
-            }
-
-            for(Iterator<Child> it = so.getChild().iterator(); it.hasNext();) {
-                Child child = it.next();
-                CityRegisterCheckerResponse ca = pChecker.checkPerson(child);
-            }
-
-
-             for (Child child : children) {
-                CityRegisterCheckerResponse cAns = pChecker.checkPerson(child);
-            }
-* */
