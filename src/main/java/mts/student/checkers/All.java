@@ -1,10 +1,10 @@
 package mts.student.checkers;
 
-import mts.student.dao.StudentOrderDaoImpl;
 import mts.student.domain.entity.StudentOrder;
-import mts.student.exception.DaoException;
+import mts.student.domain.register.city.AnswerCityRegister;
+import mts.student.domain.register.city.CityRegisterResponse;
+import mts.student.exception.CityRegException;
 
-import java.util.List;
 
 /**
  * Класс предназначен для проверки:
@@ -21,19 +21,22 @@ public class All {
     private CityRegisterChecker cityRegisterChecker;
 
     public All() {
-
+    //    cityRegisterValidator = new CityRegisterValidator();
+        cityRegisterChecker = new CityRegisterChecker();
     }
 
 
-
-
-
+    // Проверка во всех структурах
     public void checkOneOrder(StudentOrder so) {
-        AnswerCityRegister cityAnswer = checkRegistration(so);
+
+        CityRegisterResponse cityAnswer = checkRegistration(so);
+
     }
 
-    public AnswerCityRegister checkRegistration(StudentOrder so) {
+    // проверка регистрации
+    public CityRegisterResponse checkRegistration(StudentOrder so) {
         return cityRegisterChecker.checkRegistration(so);
+
     }
 
 }
