@@ -6,7 +6,6 @@ import mts.student.config.Config;
 import mts.student.domain.entity.Child;
 import mts.student.domain.entity.Person;
 import mts.student.domain.entity.StudentOrder;
-import mts.student.domain.register.city.AnswerCityRegister;
 import mts.student.domain.register.city.CityRegisterRequest;
 import mts.student.domain.register.city.CityRegisterResponse;
 import mts.student.exception.CityRegException;
@@ -29,17 +28,17 @@ public class CityRegisterChecker {
     private static final Logger logger =
             LoggerFactory.getLogger(CityRegisterChecker.class);
 
-    public AnswerCityRegister checkRegistration(StudentOrder so) throws CityRegException {
+    public CityRegisterResponse checkRegistration(StudentOrder so) throws CityRegException {
 
-        AnswerCityRegister answerCityRegister =  new AnswerCityRegister();
+        CityRegisterResponse cityRegisterResponse =  new CityRegisterResponse();
 
-        answerCityRegister.addItem(checkPerson(so.getHusband()));
-        answerCityRegister.addItem(checkPerson(so.getWife()));
+        checkPerson(so.getHusband());
+        checkPerson(so.getWife());
         for (Child child : so.getChild()) {
-            answerCityRegister.addItem(checkPerson(child));
+            checkPerson(child);
         }
 
-        return answerCityRegister;
+        return cityRegisterResponse;
     }
 
 

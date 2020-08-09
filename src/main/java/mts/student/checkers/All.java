@@ -1,9 +1,7 @@
 package mts.student.checkers;
 
 import mts.student.domain.entity.StudentOrder;
-import mts.student.domain.register.city.AnswerCityRegister;
 import mts.student.domain.register.city.CityRegisterResponse;
-import mts.student.exception.CityRegException;
 
 
 /**
@@ -25,9 +23,20 @@ public class All {
         cityRegisterChecker = new CityRegisterChecker();
     }
 
+    //обработка одной заявки
+    public void processStudentOrder (StudentOrder so) {
+
+        CityRegisterResponse response = checkOneOrder(so);
+
+
+
+        writeOneOrder(so, response);
+
+    }
+
 
     // Проверка во всех структурах
-    public void checkOneOrder(StudentOrder so) {
+    public CityRegisterResponse checkOneOrder(StudentOrder so) {
 
         CityRegisterResponse cityAnswer = checkRegistration(so);
 
@@ -36,6 +45,11 @@ public class All {
     // проверка регистрации
     public CityRegisterResponse checkRegistration(StudentOrder so) {
         return cityRegisterChecker.checkRegistration(so);
+
+    }
+
+    // запись результата в БД
+    private void writeOneOrder(StudentOrder so, CityRegisterResponse response) {
 
     }
 
