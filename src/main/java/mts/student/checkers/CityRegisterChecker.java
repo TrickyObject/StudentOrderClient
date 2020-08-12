@@ -8,6 +8,7 @@ import mts.student.domain.entity.Person;
 import mts.student.domain.entity.StudentOrder;
 import mts.student.domain.register.city.CityRegisterRequest;
 import mts.student.domain.register.city.CityRegisterResponse;
+import mts.student.domain.register.city.CityRegisterResult;
 import mts.student.exception.CityRegException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -28,17 +29,37 @@ public class CityRegisterChecker {
     private static final Logger logger =
             LoggerFactory.getLogger(CityRegisterChecker.class);
 
-    public CityRegisterResponse checkRegistration(StudentOrder so) throws CityRegException {
+    private StringBuilder answer;
 
-        CityRegisterResponse cityRegisterResponse =  new CityRegisterResponse();
+    public CityRegisterResult checkRegistration(StudentOrder so) throws CityRegException {
 
-        checkPerson(so.getHusband());
-        checkPerson(so.getWife());
-        for (Child child : so.getChild()) {
-            checkPerson(child);
+
+        CityRegisterResult cityRegisterResult =  new CityRegisterResult();
+
+        cityRegisterResult.setDecision(true);
+
+
+        if (checkPerson(so.getHusband()).isRegistered() == false) {
+            cityRegisterResult.setDecision(false);
+            cityRegisterResult.setError("Husband not registered");
         }
 
-        return cityRegisterResponse;
+        if (checkPerson(so.getWife()).isRegistered() == false) {
+            cityRegisterResult.setDecision(false);
+            cityRegisterResult.setError("Wife not registered");
+        }
+
+        for (Child child : so.getChild()) {
+
+            if (checkPerson(child).isRegistered() == false) {
+                cityRegisterResult.setDecision(false);
+                cityRegisterResult.setError(child.getFirstName() + ' '
+                        + child.getSecondName()
+                        + " not registered");
+            }
+        }
+
+        return cityRegisterResult;
     }
 
 
