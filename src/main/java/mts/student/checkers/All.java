@@ -17,6 +17,8 @@ import mts.student.domain.register.city.CityRegisterResponse;
 public class All {
 
     private CityRegisterChecker cityRegisterChecker;
+    private boolean cityRegisterResult;
+    private boolean result;
 
     public All() {
     //    cityRegisterValidator = new CityRegisterValidator();
@@ -26,30 +28,36 @@ public class All {
     //обработка одной заявки
     public void processStudentOrder (StudentOrder so) {
 
-        CityRegisterResponse response = checkOneOrder(so);
+        result = checkOneOrder(so);
 
 
 
-        writeOneOrder(so, response);
+        writeOneOrder(so, result);
 
     }
 
 
     // Проверка во всех структурах
-    public CityRegisterResponse checkOneOrder(StudentOrder so) {
+    public boolean checkOneOrder(StudentOrder so) {
 
-        CityRegisterResponse cityAnswer = checkRegistration(so);
+        cityRegisterResult = checkRegistration(so);
 
+        if (cityRegisterResult) {
+            return true;
+        }
+
+        return false;
     }
 
     // проверка регистрации
-    public CityRegisterResponse checkRegistration(StudentOrder so) {
-        return cityRegisterChecker.checkRegistration(so);
+    public boolean checkRegistration(StudentOrder so) {
+
+        return cityRegisterChecker.checkRegistration(so).isDecision();
 
     }
 
     // запись результата в БД
-    private void writeOneOrder(StudentOrder so, CityRegisterResponse response) {
+    private void writeOneOrder(StudentOrder so, boolean result) {
 
     }
 

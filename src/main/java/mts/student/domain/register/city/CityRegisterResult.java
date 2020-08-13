@@ -3,7 +3,11 @@ package mts.student.domain.register.city;
 public class CityRegisterResult {
 
     private boolean  decision;
-    private String error;
+    private StringBuilder error;
+
+    public CityRegisterResult() {
+        StringBuilder error = new StringBuilder("");
+    }
 
     @Override
     public String toString() {
@@ -13,6 +17,7 @@ public class CityRegisterResult {
                 '}';
     }
 
+
     public boolean isDecision() {
         return decision;
     }
@@ -21,12 +26,11 @@ public class CityRegisterResult {
         this.decision = decision;
     }
 
-    public String getError() {
+    public StringBuilder getError() {
         return error;
     }
 
-    // сделать через append
-    public void setError(String error) {
+    public void setError(StringBuilder error) {
         this.error = error;
     }
 }

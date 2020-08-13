@@ -31,32 +31,36 @@ public class CityRegisterChecker {
 
     private StringBuilder answer;
 
-    public CityRegisterResult checkRegistration(StudentOrder so) throws CityRegException {
+    public CityRegisterResult checkRegistration(StudentOrder so) {
 
 
         CityRegisterResult cityRegisterResult =  new CityRegisterResult();
 
         cityRegisterResult.setDecision(true);
 
-
-        if (checkPerson(so.getHusband()).isRegistered() == false) {
-            cityRegisterResult.setDecision(false);
-            cityRegisterResult.setError("Husband not registered");
-        }
-
-        if (checkPerson(so.getWife()).isRegistered() == false) {
-            cityRegisterResult.setDecision(false);
-            cityRegisterResult.setError("Wife not registered");
-        }
-
-        for (Child child : so.getChild()) {
-
-            if (checkPerson(child).isRegistered() == false) {
+        try {
+            if (checkPerson(so.getHusband()).isRegistered() == false) {
                 cityRegisterResult.setDecision(false);
-                cityRegisterResult.setError(child.getFirstName() + ' '
-                        + child.getSecondName()
-                        + " not registered");
+                cityRegisterResult.getError().append("Husband not registered");
             }
+
+            if (checkPerson(so.getWife()).isRegistered() == false) {
+                cityRegisterResult.setDecision(false);
+                cityRegisterResult.getError().append("Wife not registered");
+            }
+
+            for (Child child : so.getChild()) {
+
+                if (checkPerson(child).isRegistered() == false) {
+                    cityRegisterResult.setDecision(false);
+                    cityRegisterResult.getError().append(child.getFirstName() + ' '
+                            + child.getSecondName()
+                            + " not registered");
+                }
+            }
+
+        } catch (CityRegException e) {
+            e.printStackTrace();
         }
 
         return cityRegisterResult;
