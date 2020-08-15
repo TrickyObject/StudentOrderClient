@@ -1,7 +1,5 @@
 package mts.student.checkers;
 
-import com.sun.org.slf4j.internal.Logger;
-import com.sun.org.slf4j.internal.LoggerFactory;
 import mts.student.config.Config;
 import mts.student.domain.entity.Child;
 import mts.student.domain.entity.Person;
@@ -10,6 +8,9 @@ import mts.student.domain.register.city.CityRegisterRequest;
 import mts.student.domain.register.city.CityRegisterResponse;
 import mts.student.domain.register.city.CityRegisterResult;
 import mts.student.exception.CityRegException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;

@@ -1,11 +1,10 @@
 package mts.student.dao;
 
-
-import com.sun.org.slf4j.internal.Logger;
-import com.sun.org.slf4j.internal.LoggerFactory;
 import mts.student.config.Config;
 import mts.student.domain.entity.*;
 import mts.student.exception.DaoException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -20,6 +19,7 @@ import static mts.student.config.Config.DB_LIMIT;
 
 public class StudentOrderDaoImpl implements StudentOrderDao {
 
+//    private static final Logger logger = LoggerFactory.getLogger(StudentOrderDaoImpl.class);
     private static final Logger logger = LoggerFactory.getLogger(StudentOrderDaoImpl.class);
 
     private static final String INSERT_ORDER
@@ -80,7 +80,7 @@ public class StudentOrderDaoImpl implements StudentOrderDao {
     private Connection getConnection() throws SQLException {
         return ConnectionBuilder.getConnection();
     }
-/*
+
 //  сохранение заявок
     @Override
     public Long saveStudentOrder(StudentOrder so) throws DaoException {
@@ -96,7 +96,8 @@ public class StudentOrderDaoImpl implements StudentOrderDao {
 
             try {
                 // Заголовок
-                ps.setInt(1, StudentOrderStatus.START.ordinal());
+//                ps.setInt(1, StudentOrderStatus.START.ordinal());
+                ps.setInt(1, 0);
                 ps.setTimestamp(2, Timestamp.valueOf(LocalDateTime.now()));
                 // Муж
                 setParamsForAdult(ps, 3, so.getHusband());
@@ -131,92 +132,6 @@ public class StudentOrderDaoImpl implements StudentOrderDao {
 
         return res;
     }
-*/
-    @Override
-    public List<StudentOrder> getStudentOrders() throws DaoException {
-        return getStudentOrdersSingleSelect();
-        //return getStudentOrdersTwoSelects();
-    }
-    
-    private List<StudentOrder> getStudentOrdersSingleSelect() throws DaoException {
-        List<StudentOrder> res = new LinkedList<>();
-
-        try (Connection connection = getConnection();
-             PreparedStatement ps = connection.prepareStatement(SELECT_ORDERS_FULL)) {
-
-            Map<Long, StudentOrder> maps = new HashMap<>();
-
-            ps.setInt(1, StudentOrderStatus.START.ordinal());
-//            int limit = Integer.parseInt(Config.getProp(Config.DB_LIMIT));
-            ps.setInt(2, Integer.parseInt(Config.getProp(DB_LIMIT)));
-
-            ResultSet rs = ps.executeQuery();
-            int counter = 0;
-
-
-            while (rs.next()) {
-                Long soID = rs.getLong("student_order_id");
-                if (!maps.containsKey(soID)) {
-                    StudentOrder so = getFullStudentOrder(rs);
-
-                    res.add(so);
-                    maps.put(soID, so);
-                }
-
-                StudentOrder so = maps.get(soID);
-                so.addChild(fillChild(rs));
-                counter++;
-
-            }
-            if (counter >= Integer.parseInt(Config.getProp(DB_LIMIT))) {
-                res.remove(res.size()-1);
-            }
-
-            rs.close();
-        } catch (SQLException e) {
-            logger.error(e.getMessage(), e);
-            throw new DaoException(e);
-        }
-
-        return res;
-    }
-
-    private List<StudentOrder> getStudentOrdersTwoSelects() throws DaoException {
-        List<StudentOrder> res = new LinkedList<>();
-
-        try (Connection connection = getConnection();
-             PreparedStatement ps = connection.prepareStatement(SELECT_ORDERS)) {
-
-            ps.setInt(1, StudentOrderStatus.START.ordinal());
-            ps.setInt(2, Integer.parseInt(Config.getProp(DB_LIMIT)));
-            ResultSet rs = ps.executeQuery();
-
-
-            while (rs.next()) {
-                StudentOrder so = getFullStudentOrder(rs);
-
-                res.add(so);
-            }
-            findChildren(connection, res);
-
-            rs.close();
-        } catch (SQLException e) {
-            logger.error(e.getMessage(), e);
-            throw new DaoException(e);
-        }
-
-        return res;
-    }
-
-    private StudentOrder getFullStudentOrder(ResultSet rs) throws SQLException {
-        StudentOrder so = new StudentOrder();
-        fillStudentOrder(rs, so);
-        fillMarriage(rs, so);
-        so.setHusband(fillAdult(rs, "h_"));
-        so.setWife(fillAdult(rs, "w_"));
-        return so;
-    }
-
 
 
     // задание параметров
@@ -261,8 +176,144 @@ public class StudentOrderDaoImpl implements StudentOrderDao {
 
         so.setStudentOrderId(rs.getLong("student_order_id"));
         so.setStudentOrderDate(rs.getTimestamp("student_order_date").toLocalDateTime());
-        so.setStudentOrderStatus(StudentOrderStatus.fromValue(rs.getInt("student_order_status")));
+//        so.setStudentOrderStatus(0);
 
+    }
+
+    private Child fillChild(ResultSet rs) throws SQLException {
+        String sName = rs.getString("c_sur_name");
+        String giveName = rs.getString("c_given_name");
+        String patronymic = rs.getString("c_patronymic");
+        LocalDate dateOfBirth = rs.getDate("c_date_of_birth").toLocalDate();
+
+        Child child = new Child(sName, giveName, patronymic, dateOfBirth);
+        child.setCertNum(rs.getString("c_certificate_number"));
+        child.setIssueDate(rs.getDate("c_certificate_date").toLocalDate());
+
+        Long roID = rs.getLong("c_register_office_id");
+        String roArea = rs.getString("r_office_area_id");
+        String roName = rs.getString("r_office_name");
+
+        RegisterOffice ro = new RegisterOffice(roID, roArea, roName );
+        child.setIssueDep(ro);
+
+        Adress adress = new Adress();
+        Street street = new Street(rs.getLong("c_street_code"), "");
+        adress.setStreet(street);
+        adress.setPostCode(rs.getString("c_post_index"));
+        adress.setBuilding(rs.getString("c_building"));
+        adress.setBuilding(rs.getString("c_extension"));
+        adress.setApartment(rs.getString("c_apartment"));
+        child.setAdress(adress);
+
+        return child;
+    }
+
+    private void saveChildren(Connection connection, StudentOrder so, Long soID) throws SQLException{
+
+        try (PreparedStatement ps = connection.prepareStatement(INSERT_CHILD)) {
+
+            for (Child child : so.getChildren()) {
+                ps.setLong(1, soID);
+                setParamsForChild(ps, child);
+                // если много данных - сделать батч
+//                ps.executeUpdate();
+                ps.addBatch();
+            }
+            ps.executeBatch();
+        }
+    }
+
+
+
+//    *****************************************************************************************
+
+    @Override
+    public List<StudentOrder> getStudentOrders() throws DaoException {
+//        return getStudentOrdersSingleSelect();
+//        return getStudentOrdersTwoSelects();
+        return null;
+    }
+
+    private List<StudentOrder> getStudentOrdersSingleSelect() throws DaoException {
+        List<StudentOrder> res = new LinkedList<>();
+
+        try (Connection connection = getConnection();
+             PreparedStatement ps = connection.prepareStatement(SELECT_ORDERS_FULL)) {
+
+            Map<Long, StudentOrder> maps = new HashMap<>();
+
+//            ps.setInt(1, StudentOrderStatus.START.ordinal());
+            ps.setInt(1, 0);
+//            int limit = Integer.parseInt(Config.getProp(Config.DB_LIMIT));
+            ps.setInt(2, Integer.parseInt(Config.getProp(DB_LIMIT)));
+
+            ResultSet rs = ps.executeQuery();
+            int counter = 0;
+
+
+            while (rs.next()) {
+                Long soID = rs.getLong("student_order_id");
+                if (!maps.containsKey(soID)) {
+                    StudentOrder so = getFullStudentOrder(rs);
+
+                    res.add(so);
+                    maps.put(soID, so);
+                }
+
+                StudentOrder so = maps.get(soID);
+                so.addChild(fillChild(rs));
+                counter++;
+
+            }
+            if (counter >= Integer.parseInt(Config.getProp(DB_LIMIT))) {
+                res.remove(res.size()-1);
+            }
+
+            rs.close();
+        } catch (SQLException e) {
+            logger.error(e.getMessage(), e);
+            throw new DaoException(e);
+        }
+
+        return res;
+    }
+
+    private List<StudentOrder> getStudentOrdersTwoSelects() throws DaoException {
+        List<StudentOrder> res = new LinkedList<>();
+
+        try (Connection connection = getConnection();
+             PreparedStatement ps = connection.prepareStatement(SELECT_ORDERS)) {
+
+//            ps.setInt(1, StudentOrderStatus.START.ordinal());
+            ps.setInt(1, 0);
+            ps.setInt(2, Integer.parseInt(Config.getProp(DB_LIMIT)));
+            ResultSet rs = ps.executeQuery();
+
+
+            while (rs.next()) {
+                StudentOrder so = getFullStudentOrder(rs);
+
+                res.add(so);
+            }
+            findChildren(connection, res);
+
+            rs.close();
+        } catch (SQLException e) {
+            logger.error(e.getMessage(), e);
+            throw new DaoException(e);
+        }
+
+        return res;
+    }
+
+    private StudentOrder getFullStudentOrder(ResultSet rs) throws SQLException {
+        StudentOrder so = new StudentOrder();
+        fillStudentOrder(rs, so);
+        fillMarriage(rs, so);
+        so.setHusband(fillAdult(rs, "h_"));
+        so.setWife(fillAdult(rs, "w_"));
+        return so;
     }
 
     private void fillMarriage(ResultSet rs, StudentOrder so) throws SQLException {
@@ -311,50 +362,6 @@ public class StudentOrderDaoImpl implements StudentOrderDao {
         return adult;
     }
 
-    private Child fillChild(ResultSet rs) throws SQLException {
-        String sName = rs.getString("c_sur_name");
-        String giveName = rs.getString("c_given_name");
-        String patronymic = rs.getString("c_patronymic");
-        LocalDate dateOfBirth = rs.getDate("c_date_of_birth").toLocalDate();
-
-        Child child = new Child(sName, giveName, patronymic, dateOfBirth);
-        child.setCertNum(rs.getString("c_certificate_number"));
-        child.setIssueDate(rs.getDate("c_certificate_date").toLocalDate());
-
-        Long roID = rs.getLong("c_register_office_id");
-        String roArea = rs.getString("r_office_area_id");
-        String roName = rs.getString("r_office_name");
-
-        RegisterOffice ro = new RegisterOffice(roID, roArea, roName );
-        child.setIssueDep(ro);
-
-        Adress adress = new Adress();
-        Street street = new Street(rs.getLong("c_street_code"), "");
-        adress.setStreet(street);
-        adress.setPostCode(rs.getString("c_post_index"));
-        adress.setBuilding(rs.getString("c_building"));
-        adress.setBuilding(rs.getString("c_extension"));
-        adress.setApartment(rs.getString("c_apartment"));
-        child.setAdress(adress);
-
-        return child;
-    }
-
-    private void saveChildren(Connection connection, StudentOrder so, Long soID) throws SQLException{
-
-        try (PreparedStatement ps = connection.prepareStatement(INSERT_CHILD)) {
-
-            for (Child child : so.getChildren()) {
-                ps.setLong(1, soID);
-                setParamsForChild(ps, child);
-                // если много данных - сделать батч
-//                ps.executeUpdate();
-                ps.addBatch();
-            }
-            ps.executeBatch();
-        }
-    }
-
     private void findChildren(Connection connection, List<StudentOrder> res) throws SQLException {
 
         String cl = "(" + res.stream().map(so -> String.valueOf(so.getStudentOrderId()))
@@ -372,6 +379,5 @@ public class StudentOrderDaoImpl implements StudentOrderDao {
             }
         }
     }
-
 
 }

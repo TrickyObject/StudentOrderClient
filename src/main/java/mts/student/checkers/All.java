@@ -59,6 +59,8 @@ public class All {
     // запись результата в БД
     private void writeOneOrder(StudentOrder so, boolean result) {
 
+        System.out.println(so.getStudentOrderId() + " " + result);
+
     }
 
 }
