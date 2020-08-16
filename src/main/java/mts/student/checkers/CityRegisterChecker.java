@@ -37,7 +37,7 @@ public class CityRegisterChecker {
 
         CityRegisterResult cityRegisterResult =  new CityRegisterResult();
 
-        cityRegisterResult.setDecision(true);
+        cityRegisterResult.setDecision(false);
 
         try {
             if (checkPerson(so.getHusband()).isRegistered() == false) {
@@ -90,7 +90,5 @@ public class CityRegisterChecker {
 
 
     }
-
-
 
 }

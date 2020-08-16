@@ -230,9 +230,9 @@ public class StudentOrderDaoImpl implements StudentOrderDao {
 
     @Override
     public List<StudentOrder> getStudentOrders() throws DaoException {
-//        return getStudentOrdersSingleSelect();
+        return getStudentOrdersSingleSelect();
 //        return getStudentOrdersTwoSelects();
-        return null;
+//        return null;
     }
 
     private List<StudentOrder> getStudentOrdersSingleSelect() throws DaoException {

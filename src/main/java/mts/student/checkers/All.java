@@ -30,8 +30,6 @@ public class All {
 
         result = checkOneOrder(so);
 
-
-
         writeOneOrder(so, result);
 
     }
@@ -41,6 +39,7 @@ public class All {
     public boolean checkOneOrder(StudentOrder so) {
 
         cityRegisterResult = checkRegistration(so);
+
 
         if (cityRegisterResult) {
             return true;
@@ -53,7 +52,6 @@ public class All {
     public boolean checkRegistration(StudentOrder so) {
 
         return cityRegisterChecker.checkRegistration(so).isDecision();
-
     }
 
     // запись результата в БД
