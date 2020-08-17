@@ -2,30 +2,20 @@ package mts.student.domain.register.marriage;
 
 public class MarriageRegisterResponse {
 
-    private boolean registered;
-    private boolean temporal;
-
-    public boolean isRegistered() {
-        return registered;
-    }
-
-    public void setRegistered(boolean registered) {
-        this.registered = registered;
-    }
-
-    public boolean isTemporal() {
-        return temporal;
-    }
-
-    public void setTemporal(boolean temporal) {
-        this.temporal = temporal;
-    }
+    private boolean married;
 
     @Override
     public String toString() {
-        return "CityRegisterCheckerResponse{" +
-                "existing=" + registered +
-                ", temporal=" + temporal +
+        return "MarriageRegisterResponse{" +
+                "married=" + married +
                 '}';
+    }
+
+    public boolean isMarried() {
+        return married;
+    }
+
+    public void setMarried(boolean married) {
+        this.married = married;
     }
 }

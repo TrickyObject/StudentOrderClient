@@ -1,11 +1,11 @@
-package mts.student.domain.register.marriage;
+package mts.student.domain.register.birth;
 
-public class MarriageRegisterResult {
+public class BirthRegisterResult {
 
     private boolean  decision;
     private StringBuilder error;
 
-    public MarriageRegisterResult() {
+    public BirthRegisterResult() {
         StringBuilder error = new StringBuilder("");
     }
 

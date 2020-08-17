@@ -1,4 +1,4 @@
-package mts.student.domain.register.marriage;
+package mts.student.domain.register.birth;
 
 import mts.student.domain.entity.Adress;
 import mts.student.domain.entity.Person;
@@ -7,7 +7,7 @@ import mts.student.util.LocalDateAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
 
-public class MarriageRegisterRequest {
+public class BirthRegisterRequest {
 
     private String surName;
     private String givenName;
@@ -20,10 +20,10 @@ public class MarriageRegisterRequest {
     private String extension;
     private String apartment;
 
-    public MarriageRegisterRequest() {
+    public BirthRegisterRequest() {
     }
 
-    public MarriageRegisterRequest(Person person) {
+    public BirthRegisterRequest(Person person) {
         surName = person.getSecondName();
         givenName = person.getFirstName();
         patronymicName = person.getPatronymicName();

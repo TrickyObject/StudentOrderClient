@@ -13,6 +13,7 @@ public class Config {
     public static final String CR_URL = "cr.url";
     public static final String MRM_URL = "mrm.url";
     public static final String MRB_URL = "mrb.url";
+    public static final String SR_URL = "sr.url";
 
 
     private static Properties properties = new Properties();

@@ -11,7 +11,7 @@ public class CityRegisterResult {
 
     @Override
     public String toString() {
-        return "MarriageRegisterResult{" +
+        return "BirthRegisterResult{" +
                 "decision=" + decision +
                 ", error='" + error + '\'' +
                 '}';

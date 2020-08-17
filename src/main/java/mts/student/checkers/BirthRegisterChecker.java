@@ -3,7 +3,6 @@ package mts.student.checkers;
 import mts.student.config.Config;
 import mts.student.domain.entity.Person;
 import mts.student.domain.entity.StudentOrder;
-
 import mts.student.domain.register.marriage.MarriageRegisterRequest;
 import mts.student.domain.register.marriage.MarriageRegisterResponse;
 import mts.student.domain.register.marriage.MarriageRegisterResult;
@@ -17,7 +16,7 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 
-public class MarriageRegisterChecker {
+public class BirthRegisterChecker {
 
     private static final Logger logger =
             LoggerFactory.getLogger(CityRegisterChecker.class);
@@ -29,11 +28,11 @@ public class MarriageRegisterChecker {
         MarriageRegisterResult cityRegisterResult =  new MarriageRegisterResult();
 
         cityRegisterResult.setDecision(false);
-
+// TODO: передавать сертификаты о рождении
         try {
             if (checkPerson(so.getHusband()).isRegistered() != false) {
                 cityRegisterResult.setDecision(true);
-                cityRegisterResult.getError().append("Marriage registered");
+                cityRegisterResult.getError().append("Child registered");
             }
 
         } catch (MarriageRegisterException e) {
@@ -52,7 +51,7 @@ public class MarriageRegisterChecker {
 
             Client client = ClientBuilder.newClient();
             MarriageRegisterResponse response = client.target(
-                    Config.getProp(Config.MRM_URL))
+                    Config.getProp(Config.MRB_URL))
                     .request(MediaType.APPLICATION_JSON)
                     .header(HttpHeaders.ACCEPT_CHARSET, "UTF-8")
                     .post(Entity.entity(request, MediaType.APPLICATION_JSON))
