@@ -31,7 +31,7 @@ public class MarriageRegisterChecker {
         cityRegisterResult.setDecision(false);
 
         try {
-            if (checkPerson(so.getHusband()).isRegistered() != false) {
+            if (checkPerson(so.getHusband()).isMarried() != false) {
                 cityRegisterResult.setDecision(true);
                 cityRegisterResult.getError().append("Marriage registered");
             }

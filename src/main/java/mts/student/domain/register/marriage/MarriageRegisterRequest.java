@@ -9,45 +9,177 @@ import java.time.LocalDate;
 
 public class MarriageRegisterRequest {
 
-    private String surName;
-    private String givenName;
-    private String patronymicName;
-    // Поле, которое использует адаптер
+    private String husbandSurName;
+    private String husbandGivenName;
+    private String husbandPatronymicName;
     @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
-    private LocalDate dateOfBirth;
-    private Long streetCode;
-    private String building;
-    private String extension;
-    private String apartment;
+    private LocalDate husbandDateOfBirth;
+    private String husbandPassportSerial;
+    private String husbandPassportNumber;
+    @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
+    private LocalDate husbandPassportDate;
 
-    public MarriageRegisterRequest() {
-    }
+    private String wifeSurName;
+    private String wifeGivenName;
+    private String wifePatronymicName;
+    @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
+    private LocalDate wifeDateOfBirth;
+    private String wifePassportSerial;
+    private String wifePassportNumber;
+    @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
+    private LocalDate wifePassportDate;
 
-    public MarriageRegisterRequest(Person person) {
-        surName = person.getSecondName();
-        givenName = person.getFirstName();
-        patronymicName = person.getPatronymicName();
-        dateOfBirth = person.getBirthDay();
-        Adress adr = person.getAdress();
-        streetCode = adr.getStreet().getStreet_code();
-        building = adr.getBuilding();
-        extension = adr.getExtension();
-        apartment = adr.getApartment();
+    private String marriageCertNumber;
+    @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
+    private String marriageCertDate;
 
-    }
-
-    // TODO: refactor
-    public String toJSON() {
-        return "{" +
-                "surName:" + surName + '\n' +
-                ", givenName:" + givenName + '\n' +
-                ", patronymicName:" + patronymicName + '\n' +
-                ", dateOfBirth:" + dateOfBirth + '\n' +
-                ", streetCode:" + streetCode + '\n' +
-                ", building:" + building + '\n' +
-                ", extension:" + extension + '\n' +
-                ", apartment:" + apartment + '\n' +
+    @Override
+    public String toString() {
+        return "MarriageRegisterRequest{" +
+                "husbandSurName='" + husbandSurName + '\'' +
+                ", husbandGivenName='" + husbandGivenName + '\'' +
+                ", husbandPatronymicName='" + husbandPatronymicName + '\'' +
+                ", husbandDateOfBirth=" + husbandDateOfBirth +
+                ", husbandPassportSerial='" + husbandPassportSerial + '\'' +
+                ", husbandPassportNumber='" + husbandPassportNumber + '\'' +
+                ", husbandPassportDate=" + husbandPassportDate +
+                ", wifeSurName='" + wifeSurName + '\'' +
+                ", wifeGivenName='" + wifeGivenName + '\'' +
+                ", wifePatronymicName='" + wifePatronymicName + '\'' +
+                ", wifeDateOfBirth=" + wifeDateOfBirth +
+                ", wifePassportSerial='" + wifePassportSerial + '\'' +
+                ", wifePassportNumber='" + wifePassportNumber + '\'' +
+                ", wifePassportDate=" + wifePassportDate +
+                ", marriageCertNumber='" + marriageCertNumber + '\'' +
+                ", marriageCertDate='" + marriageCertDate + '\'' +
                 '}';
     }
 
+    public String getHusbandSurName() {
+        return husbandSurName;
+    }
+
+    public void setHusbandSurName(String husbandSurName) {
+        this.husbandSurName = husbandSurName;
+    }
+
+    public String getHusbandGivenName() {
+        return husbandGivenName;
+    }
+
+    public void setHusbandGivenName(String husbandGivenName) {
+        this.husbandGivenName = husbandGivenName;
+    }
+
+    public String getHusbandPatronymicName() {
+        return husbandPatronymicName;
+    }
+
+    public void setHusbandPatronymicName(String husbandPatronymicName) {
+        this.husbandPatronymicName = husbandPatronymicName;
+    }
+
+    public LocalDate getHusbandDateOfBirth() {
+        return husbandDateOfBirth;
+    }
+
+    public void setHusbandDateOfBirth(LocalDate husbandDateOfBirth) {
+        this.husbandDateOfBirth = husbandDateOfBirth;
+    }
+
+    public String getHusbandPassportSerial() {
+        return husbandPassportSerial;
+    }
+
+    public void setHusbandPassportSerial(String husbandPassportSerial) {
+        this.husbandPassportSerial = husbandPassportSerial;
+    }
+
+    public String getHusbandPassportNumber() {
+        return husbandPassportNumber;
+    }
+
+    public void setHusbandPassportNumber(String husbandPassportNumber) {
+        this.husbandPassportNumber = husbandPassportNumber;
+    }
+
+    public LocalDate getHusbandPassportDate() {
+        return husbandPassportDate;
+    }
+
+    public void setHusbandPassportDate(LocalDate husbandPassportDate) {
+        this.husbandPassportDate = husbandPassportDate;
+    }
+
+    public String getWifeSurName() {
+        return wifeSurName;
+    }
+
+    public void setWifeSurName(String wifeSurName) {
+        this.wifeSurName = wifeSurName;
+    }
+
+    public String getWifeGivenName() {
+        return wifeGivenName;
+    }
+
+    public void setWifeGivenName(String wifeGivenName) {
+        this.wifeGivenName = wifeGivenName;
+    }
+
+    public String getWifePatronymicName() {
+        return wifePatronymicName;
+    }
+
+    public void setWifePatronymicName(String wifePatronymicName) {
+        this.wifePatronymicName = wifePatronymicName;
+    }
+
+    public LocalDate getWifeDateOfBirth() {
+        return wifeDateOfBirth;
+    }
+
+    public void setWifeDateOfBirth(LocalDate wifeDateOfBirth) {
+        this.wifeDateOfBirth = wifeDateOfBirth;
+    }
+
+    public String getWifePassportSerial() {
+        return wifePassportSerial;
+    }
+
+    public void setWifePassportSerial(String wifePassportSerial) {
+        this.wifePassportSerial = wifePassportSerial;
+    }
+
+    public String getWifePassportNumber() {
+        return wifePassportNumber;
+    }
+
+    public void setWifePassportNumber(String wifePassportNumber) {
+        this.wifePassportNumber = wifePassportNumber;
+    }
+
+    public LocalDate getWifePassportDate() {
+        return wifePassportDate;
+    }
+
+    public void setWifePassportDate(LocalDate wifePassportDate) {
+        this.wifePassportDate = wifePassportDate;
+    }
+
+    public String getMarriageCertNumber() {
+        return marriageCertNumber;
+    }
+
+    public void setMarriageCertNumber(String marriageCertNumber) {
+        this.marriageCertNumber = marriageCertNumber;
+    }
+
+    public String getMarriageCertDate() {
+        return marriageCertDate;
+    }
+
+    public void setMarriageCertDate(String marriageCertDate) {
+        this.marriageCertDate = marriageCertDate;
+    }
 }

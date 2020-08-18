@@ -11,12 +11,11 @@ public class CityRegisterResult {
 
     @Override
     public String toString() {
-        return "BirthRegisterResult{" +
+        return "CityRegisterResult{" +
                 "decision=" + decision +
-                ", error='" + error + '\'' +
+                ", error=" + error +
                 '}';
     }
-
 
     public boolean isDecision() {
         return decision;

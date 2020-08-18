@@ -5,18 +5,17 @@ public class StudentRegisterResult {
     private boolean  decision;
     private StringBuilder error;
 
-    public StudentRegisterResult() {
-        StringBuilder error = new StringBuilder("");
-    }
-
     @Override
     public String toString() {
-        return "BirthRegisterResult{" +
+        return "StudentRegisterResult{" +
                 "decision=" + decision +
-                ", error='" + error + '\'' +
+                ", error=" + error +
                 '}';
     }
 
+    public StudentRegisterResult() {
+        StringBuilder error = new StringBuilder("");
+    }
 
     public boolean isDecision() {
         return decision;

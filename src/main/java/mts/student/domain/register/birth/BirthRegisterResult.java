@@ -2,7 +2,7 @@ package mts.student.domain.register.birth;
 
 public class BirthRegisterResult {
 
-    private boolean  decision;
+    private boolean decision;
     private StringBuilder error;
 
     public BirthRegisterResult() {
@@ -16,7 +16,6 @@ public class BirthRegisterResult {
                 ", error='" + error + '\'' +
                 '}';
     }
-
 
     public boolean isDecision() {
         return decision;

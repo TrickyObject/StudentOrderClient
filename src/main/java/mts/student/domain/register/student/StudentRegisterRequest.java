@@ -1,9 +1,6 @@
 package mts.student.domain.register.student;
 
-import mts.student.domain.entity.Adress;
-import mts.student.domain.entity.Person;
 import mts.student.util.LocalDateAdapter;
-
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
 
@@ -12,42 +9,87 @@ public class StudentRegisterRequest {
     private String surName;
     private String givenName;
     private String patronymicName;
-    // Поле, которое использует адаптер
     @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
     private LocalDate dateOfBirth;
-    private Long streetCode;
-    private String building;
-    private String extension;
-    private String apartment;
+    private String passportSerial;
+    private String passportNumber;
+    @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
+    private LocalDate passportDate;
+//    private String documentNumber;
+//    @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
+//    private LocalDate documentDate;
+//    private String university;
+//    private String faculty;
 
-    public StudentRegisterRequest() {
-    }
 
-    public StudentRegisterRequest(Person person) {
-        surName = person.getSecondName();
-        givenName = person.getFirstName();
-        patronymicName = person.getPatronymicName();
-        dateOfBirth = person.getBirthDay();
-        Adress adr = person.getAdress();
-        streetCode = adr.getStreet().getStreet_code();
-        building = adr.getBuilding();
-        extension = adr.getExtension();
-        apartment = adr.getApartment();
-
-    }
-
-// TODO: refactor
-    public String toJSON() {
-        return "{" +
-                "surName:" + surName + '\n' +
-                ", givenName:" + givenName + '\n' +
-                ", patronymicName:" + patronymicName + '\n' +
-                ", dateOfBirth:" + dateOfBirth + '\n' +
-                ", streetCode:" + streetCode + '\n' +
-                ", building:" + building + '\n' +
-                ", extension:" + extension + '\n' +
-                ", apartment:" + apartment + '\n' +
+    @Override
+    public String toString() {
+        return "StudentRegisterRequest{" +
+                "surName='" + surName + '\'' +
+                ", givenName='" + givenName + '\'' +
+                ", patronymicName='" + patronymicName + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", passportSerial='" + passportSerial + '\'' +
+                ", passportNumber='" + passportNumber + '\'' +
+                ", passportDate=" + passportDate +
                 '}';
     }
+
+    public String getSurName() {
+        return surName;
+    }
+
+    public void setSurName(String surName) {
+        this.surName = surName;
+    }
+
+    public String getGivenName() {
+        return givenName;
+    }
+
+    public void setGivenName(String givenName) {
+        this.givenName = givenName;
+    }
+
+    public String getPatronymicName() {
+        return patronymicName;
+    }
+
+    public void setPatronymicName(String patronymicName) {
+        this.patronymicName = patronymicName;
+    }
+
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getPassportSerial() {
+        return passportSerial;
+    }
+
+    public void setPassportSerial(String passportSerial) {
+        this.passportSerial = passportSerial;
+    }
+
+    public String getPassportNumber() {
+        return passportNumber;
+    }
+
+    public void setPassportNumber(String passportNumber) {
+        this.passportNumber = passportNumber;
+    }
+
+    public LocalDate getPassportDate() {
+        return passportDate;
+    }
+
+    public void setPassportDate(LocalDate passportDate) {
+        this.passportDate = passportDate;
+    }
+
 
 }

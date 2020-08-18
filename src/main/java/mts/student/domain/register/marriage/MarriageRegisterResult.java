@@ -11,12 +11,11 @@ public class MarriageRegisterResult {
 
     @Override
     public String toString() {
-        return "BirthRegisterResult{" +
+        return "MarriageRegisterResult{" +
                 "decision=" + decision +
-                ", error='" + error + '\'' +
+                ", error=" + error +
                 '}';
     }
-
 
     public boolean isDecision() {
         return decision;
