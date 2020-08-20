@@ -1,6 +1,7 @@
 package mts.student.checkers;
 
 import mts.student.config.Config;
+import mts.student.domain.entity.Adult;
 import mts.student.domain.entity.Person;
 import mts.student.domain.entity.StudentOrder;
 import mts.student.domain.register.marriage.MarriageRegisterRequest;
@@ -26,27 +27,31 @@ public class StudentRegisterChecker {
 
     private StringBuilder answer;
 
-    public StudentRegisterResult checkRegistration(StudentOrder so) {
+    public StudentRegisterResult checkStudentRegistration(StudentOrder so) {
 
         StudentRegisterResult studentRegisterResult =  new StudentRegisterResult();
 
-        cityRegisterResult.setDecision(false);
-//TODO: заменить на студента
+        studentRegisterResult.setDecision(true);
+
         try {
-            if (checkPerson(so.getHusband()).isMarried() != false) {
-                cityRegisterResult.setDecision(true);
-                cityRegisterResult.getError().append("Marriage registered");
+            if (checkPerson(so.getHusband()).isStudying() == false) {
+                studentRegisterResult.setDecision(false);
+                studentRegisterResult.getError().append("Husband isn't studnet");
+            }
+
+            if (checkPerson(so.getHusband()).isStudying() == false) {
+                studentRegisterResult.setDecision(false);
+                studentRegisterResult.getError().append("Wife isn't student");
             }
 
         } catch (MarriageRegisterException e) {
             e.printStackTrace();
         }
 
-        return cityRegisterResult;
+        return studentRegisterResult;
     }
 
-
-    public StudentRegisterResponse checkPerson(Person person)
+    public StudentRegisterResponse checkPerson(Adult person)
             throws MarriageRegisterException {
 
         try {
@@ -62,6 +67,7 @@ public class StudentRegisterChecker {
 
             return response;
         } catch (Exception e) {
+            // TODO: refactor
             throw new MarriageRegisterException("410", e.getMessage(), e);
         }
 

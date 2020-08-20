@@ -19,28 +19,29 @@ import javax.ws.rs.core.MediaType;
 
 public class MarriageRegisterChecker {
 
+
     private static final Logger logger =
             LoggerFactory.getLogger(CityRegisterChecker.class);
 
     private StringBuilder answer;
 
-    public MarriageRegisterResult checkRegistration(StudentOrder so) {
+    public MarriageRegisterResult marriageRegisterResult(StudentOrder so) {
+// TODO: переделать на MarriageCertificate
+        MarriageRegisterResult marriageRegisterResult =  new MarriageRegisterResult();
 
-        MarriageRegisterResult cityRegisterResult =  new MarriageRegisterResult();
-
-        cityRegisterResult.setDecision(false);
+        marriageRegisterResult.setDecision(false);
 
         try {
             if (checkPerson(so.getHusband()).isMarried() != false) {
-                cityRegisterResult.setDecision(true);
-                cityRegisterResult.getError().append("Marriage registered");
+                marriageRegisterResult.setDecision(true);
+                marriageRegisterResult.getError().append("Marriage registered");
             }
 
         } catch (MarriageRegisterException e) {
             e.printStackTrace();
         }
 
-        return cityRegisterResult;
+        return marriageRegisterResult;
     }
 
 
@@ -66,4 +67,6 @@ public class MarriageRegisterChecker {
 
 
     }
+
+
 }

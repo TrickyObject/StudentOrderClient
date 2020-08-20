@@ -1,5 +1,7 @@
 package mts.student.domain.register.student;
 
+import mts.student.domain.entity.Adult;
+import mts.student.domain.entity.Person;
 import mts.student.util.LocalDateAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
@@ -21,6 +23,19 @@ public class StudentRegisterRequest {
 //    private String university;
 //    private String faculty;
 
+
+    public StudentRegisterRequest() {
+    }
+
+    public StudentRegisterRequest(Adult adult) {
+        this.surName = adult.getFirstName();
+        this.givenName = adult.getSecondName();
+        this.patronymicName = adult.getPatronymicName();
+        this.dateOfBirth = adult.getBirthDay();
+        this.passportSerial = adult.getPassportSerial();
+        this.passportNumber = adult.getPassportNum();
+        this.passportDate = adult.getPassportDate();
+    }
 
     @Override
     public String toString() {

@@ -14,7 +14,7 @@ public class StudentRegisterResult {
     }
 
     public StudentRegisterResult() {
-        StringBuilder error = new StringBuilder("");
+        this.error = new StringBuilder("");
     }
 
     public boolean isDecision() {

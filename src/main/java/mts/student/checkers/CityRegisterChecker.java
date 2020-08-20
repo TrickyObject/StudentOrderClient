@@ -67,7 +67,6 @@ public class CityRegisterChecker {
         return cityRegisterResult;
     }
 
-
     public CityRegisterResponse checkPerson(Person person)
             throws CityRegException {
 

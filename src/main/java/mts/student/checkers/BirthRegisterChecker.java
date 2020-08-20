@@ -21,7 +21,7 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 
 public class BirthRegisterChecker {
-
+/*
     private static final Logger logger =
             LoggerFactory.getLogger(CityRegisterChecker.class);
 
@@ -69,4 +69,6 @@ public class BirthRegisterChecker {
 
 
     }
+
+    */
 }

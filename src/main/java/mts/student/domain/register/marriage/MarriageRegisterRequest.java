@@ -33,6 +33,11 @@ public class MarriageRegisterRequest {
     @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
     private String marriageCertDate;
 
+    public MarriageRegisterRequest() {
+    }
+
+
+
     @Override
     public String toString() {
         return "MarriageRegisterRequest{" +

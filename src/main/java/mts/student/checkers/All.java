@@ -1,7 +1,6 @@
 package mts.student.checkers;
 
 import mts.student.domain.entity.StudentOrder;
-import mts.student.domain.register.city.CityRegisterResponse;
 
 
 /**
@@ -17,12 +16,15 @@ import mts.student.domain.register.city.CityRegisterResponse;
 public class All {
 
     private CityRegisterChecker cityRegisterChecker;
+    private StudentRegisterChecker studentRegisterChecker;
+
     private boolean cityRegisterResult;
+    private boolean studentRegisterResult;
     private boolean result;
 
     public All() {
-    //    cityRegisterValidator = new CityRegisterValidator();
         cityRegisterChecker = new CityRegisterChecker();
+        studentRegisterChecker = new StudentRegisterChecker();
     }
 
     //обработка одной заявки
@@ -38,21 +40,33 @@ public class All {
     // Проверка во всех структурах
     public boolean checkOneOrder(StudentOrder so) {
 
-        cityRegisterResult = checkRegistration(so);
+//        cityRegisterResult = checkRegistration(so);
+        studentRegisterResult = checkStudying(so);
 
-
-        if (cityRegisterResult) {
+        if (studentRegisterResult) {
             return true;
         }
+
+//        if (cityRegisterResult && studentRegisterResult) {
+//            return true;
+//        }
 
         return false;
     }
 
     // проверка регистрации
     public boolean checkRegistration(StudentOrder so) {
-
         return cityRegisterChecker.checkRegistration(so).isDecision();
     }
+
+    public boolean checkStudying (StudentOrder so) {
+        return studentRegisterChecker.checkStudentRegistration(so).isDecision();
+    }
+
+
+
+
+
 
     // запись результата в БД
     private void writeOneOrder(StudentOrder so, boolean result) {
