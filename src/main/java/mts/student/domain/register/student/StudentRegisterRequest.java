@@ -1,7 +1,6 @@
 package mts.student.domain.register.student;
 
 import mts.student.domain.entity.Adult;
-import mts.student.domain.entity.Person;
 import mts.student.util.LocalDateAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
@@ -9,7 +8,7 @@ import java.time.LocalDate;
 public class StudentRegisterRequest {
 
     private String surName;
-    private String givenName;
+    private String firstName;
     private String patronymicName;
     @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
     private LocalDate dateOfBirth;
@@ -28,8 +27,8 @@ public class StudentRegisterRequest {
     }
 
     public StudentRegisterRequest(Adult adult) {
-        this.surName = adult.getFirstName();
-        this.givenName = adult.getSecondName();
+        this.surName = adult.getSurName();
+        this.firstName = adult.getFirstName();
         this.patronymicName = adult.getPatronymicName();
         this.dateOfBirth = adult.getBirthDay();
         this.passportSerial = adult.getPassportSerial();
@@ -41,7 +40,7 @@ public class StudentRegisterRequest {
     public String toString() {
         return "StudentRegisterRequest{" +
                 "surName='" + surName + '\'' +
-                ", givenName='" + givenName + '\'' +
+                ", firstName='" + firstName + '\'' +
                 ", patronymicName='" + patronymicName + '\'' +
                 ", dateOfBirth=" + dateOfBirth +
                 ", passportSerial='" + passportSerial + '\'' +
@@ -58,12 +57,12 @@ public class StudentRegisterRequest {
         this.surName = surName;
     }
 
-    public String getGivenName() {
-        return givenName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setGivenName(String givenName) {
-        this.givenName = givenName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getPatronymicName() {

@@ -24,10 +24,10 @@ public class StudentOrderDaoImpl implements StudentOrderDao {
 
     private static final String INSERT_ORDER
             = "INSERT INTO jc_student_order(" +
-            "student_order_status, student_order_date, h_sur_name, h_given_name," +
+            "student_order_status, student_order_date, h_sur_name, h_first_name," +
             " h_patronymic, h_date_of_birth, h_passport_seria, h_passport_number, h_passport_date, h_passport_office_id," +
             " h_post_index, h_street_code, h_building, h_extension, h_apartment, h_university_id, h_student_number," +
-            " w_sur_name, w_given_name, w_patronymic, w_date_of_birth, w_passport_seria, w_passport_number," +
+            " w_sur_name, w_first_name, w_patronymic, w_date_of_birth, w_passport_seria, w_passport_number," +
             " w_passport_date, w_passport_office_id, w_post_index, w_street_code, w_building, w_extension, w_apartment," +
             " w_university_id, w_student_number, " +
             "certificate_id, register_office_id, marriage_date) " +
@@ -35,7 +35,7 @@ public class StudentOrderDaoImpl implements StudentOrderDao {
 
     private static final String INSERT_CHILD
             = "INSERT INTO jc_student_child(" +
-            "student_order_id, c_sur_name, c_given_name, c_patronymic, " +
+            "student_order_id, c_sur_name, c_first_name, c_patronymic, " +
             "c_date_of_birth, c_certificate_number, c_certificate_date, c_register_office_id, " +
             "c_post_index, c_street_code, c_building, c_extension, c_apartment)" +
             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
@@ -157,7 +157,7 @@ public class StudentOrderDaoImpl implements StudentOrderDao {
     }
 
     private void setParamsForPerson(PreparedStatement ps, int start, Person person) throws SQLException {
-        ps.setString(start, person.getSecondName());
+        ps.setString(start, person.getSurName());
         ps.setString(start + 1, person.getFirstName());
         ps.setString(start + 2, person.getPatronymicName());
         ps.setDate(start + 3, Date.valueOf(person.getBirthDay()));
@@ -182,11 +182,11 @@ public class StudentOrderDaoImpl implements StudentOrderDao {
 
     private Child fillChild(ResultSet rs) throws SQLException {
         String sName = rs.getString("c_sur_name");
-        String giveName = rs.getString("c_given_name");
+        String firstName = rs.getString("c_first_name");
         String patronymic = rs.getString("c_patronymic");
         LocalDate dateOfBirth = rs.getDate("c_date_of_birth").toLocalDate();
 
-        Child child = new Child(sName, giveName, patronymic, dateOfBirth);
+        Child child = new Child(sName, firstName, patronymic, dateOfBirth);
         child.setCertNum(rs.getString("c_certificate_number"));
         child.setIssueDate(rs.getDate("c_certificate_date").toLocalDate());
 
@@ -331,8 +331,8 @@ public class StudentOrderDaoImpl implements StudentOrderDao {
     private Adult fillAdult(ResultSet rs, String prefix) throws SQLException {
 
         Adult adult = new Adult();
-        adult.setSecondName(rs.getString(prefix + "sur_name"));
-        adult.setFirstName(rs.getString(prefix + "given_name"));
+        adult.setSurName(rs.getString(prefix + "sur_name"));
+        adult.setFirstName(rs.getString(prefix + "first_name"));
         adult.setPatronymicName(rs.getString(prefix + "patronymic"));
         adult.setBirthDay(rs.getDate(prefix + "date_of_birth").toLocalDate());
         adult.setPassportSerial(rs.getString(prefix + "passport_seria"));

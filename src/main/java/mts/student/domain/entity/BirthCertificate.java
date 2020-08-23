@@ -1,12 +1,11 @@
-package mts.student.domain.register.birth;
+package mts.student.domain.entity;
 
-import mts.student.domain.entity.BirthCertificate;
 import mts.student.util.LocalDateAdapter;
 
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
 
-public class BirthRegisterRequest {
+public class BirthCertificate {
 
     private String fatherFirstName;
     private String fatherSurName;
@@ -38,58 +37,34 @@ public class BirthRegisterRequest {
     @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
     private LocalDate birthCertDate;
 
-    public BirthRegisterRequest() {
+    public BirthCertificate() {
     }
 
-    public BirthRegisterRequest(BirthCertificate bc) {
-        this.fatherFirstName = bc.getFatherFirstName();
-        this.fatherSurName = bc.getFatherSurName();
-        this.fatherPatronymicName = bc.getFatherPatronymicName();
-        this.fatherDateOfBirth = bc.getFatherDateOfBirth();
-        this.fatherPassportSerial = bc.getFatherPassportSerial();
-        this.fatherPassportNumber = bc.getFatherPassportNumber();
-        this.fatherPassportDate = bc.getFatherPassportDate();
+    public BirthCertificate(Adult husband, Adult wife, Child child) {
 
-        this.motherFirstName = bc.getMotherFirstName();
-        this.motherSurName = bc.getMotherSurName();
-        this.motherPatronymicName = bc.getMotherPatronymicName();
-        this.motherDateOfBirth = bc.getMotherDateOfBirth();
-        this.motherPassportSerial = bc.getMotherPassportSerial();
-        this.motherPassportNumber = bc.getMotherPassportNumber();
-        this.motherPassportDate = bc.getMotherPassportDate();
+        this.fatherFirstName = husband.getFirstName();
+        this.fatherSurName = husband.getSurName();
+        this.fatherPatronymicName = husband.getPatronymicName();
+        this.fatherDateOfBirth = husband.getBirthDay();
+        this.fatherPassportSerial = husband.getPassportSerial();
+        this.fatherPassportNumber = husband.getPassportNum();
+        this.fatherPassportDate = husband.getPassportDate();
 
-        this.childFirstName = bc.getChildFirstName();
-        this.childSurName = bc.getChildSurName();
-        this.childPatronymicName = bc.getChildPatronymicName();
-        this.childDateOfBirth = bc.getChildDateOfBirth();
-        this.birthCertNumber = bc.getBirthCertNumber();
-        this.birthCertDate = bc.getBirthCertDate();
-    }
+        this.motherFirstName = wife.getFirstName();
+        this.motherSurName = wife.getSurName();
+        this.motherPatronymicName = wife.getPatronymicName();
+        this.motherDateOfBirth = wife.getBirthDay();
+        this.motherPassportSerial = wife.getPassportSerial();
+        this.motherPassportNumber = wife.getPassportNum();
+        this.motherPassportDate = wife.getPassportDate();
 
-    @Override
-    public String toString() {
-        return "BirthRegisterRequest{" +
-                "fatherFirstName='" + fatherFirstName + '\'' +
-                ", fatherSurName='" + fatherSurName + '\'' +
-                ", fatherPatronymicName='" + fatherPatronymicName + '\'' +
-                ", fatherDateOfBirth=" + fatherDateOfBirth +
-                ", fatherPassportSerial='" + fatherPassportSerial + '\'' +
-                ", fatherPassportNumber='" + fatherPassportNumber + '\'' +
-                ", fatherPassportDate=" + fatherPassportDate +
-                ", motherFirstName='" + motherFirstName + '\'' +
-                ", motherSurName='" + motherSurName + '\'' +
-                ", motherPatronymicName='" + motherPatronymicName + '\'' +
-                ", motherDateOfBirth=" + motherDateOfBirth +
-                ", motherPassportSerial='" + motherPassportSerial + '\'' +
-                ", motherPassportNumber='" + motherPassportNumber + '\'' +
-                ", motherPassportDate=" + motherPassportDate +
-                ", childFirstName='" + childFirstName + '\'' +
-                ", childSurName='" + childSurName + '\'' +
-                ", childPatronymicName='" + childPatronymicName + '\'' +
-                ", childDateOfBirth=" + childDateOfBirth +
-                ", birthCertNumber='" + birthCertNumber + '\'' +
-                ", birthCertDate=" + birthCertDate +
-                '}';
+        this.childFirstName = child.getFirstName();
+        this.childSurName = child.getSurName();
+        this.childPatronymicName = child.getPatronymicName();
+        this.childDateOfBirth = child.getBirthDay();
+        this.birthCertNumber = child.getCertNum();
+        this.birthCertDate = child.getIssueDate();
+
     }
 
     public String getFatherFirstName() {

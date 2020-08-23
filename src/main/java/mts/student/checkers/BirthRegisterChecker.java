@@ -1,6 +1,8 @@
 package mts.student.checkers;
 
 import mts.student.config.Config;
+import mts.student.domain.entity.BirthCertificate;
+import mts.student.domain.entity.Child;
 import mts.student.domain.entity.Person;
 import mts.student.domain.entity.StudentOrder;
 import mts.student.domain.register.birth.BirthRegisterRequest;
@@ -21,7 +23,7 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 
 public class BirthRegisterChecker {
-/*
+
     private static final Logger logger =
             LoggerFactory.getLogger(CityRegisterChecker.class);
 
@@ -31,27 +33,34 @@ public class BirthRegisterChecker {
 
         BirthRegisterResult birthRegisterResult =  new BirthRegisterResult();
 
-        cityRegisterResult.setDecision(false);
-// TODO: передавать сертификаты о рождении
-        try {
-            if (checkPerson(so.getHusband()).isMarried() != false) {
-                cityRegisterResult.setDecision(true);
-                cityRegisterResult.getError().append("Child registered");
+        birthRegisterResult.setDecision(false);
+
+        for (Child child : so.getChild()) {
+
+            BirthCertificate birthCertificate =
+                    new BirthCertificate(so.getHusband(), so.getWife(), child);
+
+            try {
+                if (checkBirth(birthCertificate).isBorn() != false) {
+                    birthRegisterResult.setDecision(true);
+                    birthRegisterResult.getError().append("Child registered");
+                }
+
+            } catch (BirthRegException e) {
+                e.printStackTrace();
             }
 
-        } catch (BirthRegException e) {
-            e.printStackTrace();
         }
 
-        return cityRegisterResult;
+        return birthRegisterResult;
     }
 
 
-    public BirthRegisterResponse checkPerson(Person person)
-            throws MarriageRegisterException {
+    public BirthRegisterResponse checkBirth(BirthCertificate birthCertificate)
+            throws BirthRegException {
 
         try {
-            BirthRegisterRequest request = new BirthRegisterRequest(person);
+            BirthRegisterRequest request = new BirthRegisterRequest(birthCertificate);
 
             Client client = ClientBuilder.newClient();
             BirthRegisterResponse response = client.target(
@@ -63,12 +72,12 @@ public class BirthRegisterChecker {
 
             return response;
         } catch (Exception e) {
-            throw new MarriageRegisterException("410", e.getMessage(), e);
+            throw new BirthRegException("410", e.getMessage(), e);
         }
 
 
 
     }
 
-    */
+
 }

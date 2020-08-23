@@ -1,7 +1,5 @@
 package mts.student.domain.register.marriage;
 
-import mts.student.domain.entity.Adress;
-import mts.student.domain.entity.Person;
 import mts.student.util.LocalDateAdapter;
 
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -10,7 +8,7 @@ import java.time.LocalDate;
 public class MarriageRegisterRequest {
 
     private String husbandSurName;
-    private String husbandGivenName;
+    private String husbandFirstName;
     private String husbandPatronymicName;
     @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
     private LocalDate husbandDateOfBirth;
@@ -20,7 +18,7 @@ public class MarriageRegisterRequest {
     private LocalDate husbandPassportDate;
 
     private String wifeSurName;
-    private String wifeGivenName;
+    private String wifeFirstName;
     private String wifePatronymicName;
     @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
     private LocalDate wifeDateOfBirth;
@@ -37,19 +35,18 @@ public class MarriageRegisterRequest {
     }
 
 
-
     @Override
     public String toString() {
         return "MarriageRegisterRequest{" +
                 "husbandSurName='" + husbandSurName + '\'' +
-                ", husbandGivenName='" + husbandGivenName + '\'' +
+                ", husbandFirstName='" + husbandFirstName + '\'' +
                 ", husbandPatronymicName='" + husbandPatronymicName + '\'' +
                 ", husbandDateOfBirth=" + husbandDateOfBirth +
                 ", husbandPassportSerial='" + husbandPassportSerial + '\'' +
                 ", husbandPassportNumber='" + husbandPassportNumber + '\'' +
                 ", husbandPassportDate=" + husbandPassportDate +
                 ", wifeSurName='" + wifeSurName + '\'' +
-                ", wifeGivenName='" + wifeGivenName + '\'' +
+                ", wifeFirstName='" + wifeFirstName + '\'' +
                 ", wifePatronymicName='" + wifePatronymicName + '\'' +
                 ", wifeDateOfBirth=" + wifeDateOfBirth +
                 ", wifePassportSerial='" + wifePassportSerial + '\'' +
@@ -68,12 +65,12 @@ public class MarriageRegisterRequest {
         this.husbandSurName = husbandSurName;
     }
 
-    public String getHusbandGivenName() {
-        return husbandGivenName;
+    public String getHusbandFirstName() {
+        return husbandFirstName;
     }
 
-    public void setHusbandGivenName(String husbandGivenName) {
-        this.husbandGivenName = husbandGivenName;
+    public void setHusbandFirstName(String husbandFirstName) {
+        this.husbandFirstName = husbandFirstName;
     }
 
     public String getHusbandPatronymicName() {
@@ -124,12 +121,12 @@ public class MarriageRegisterRequest {
         this.wifeSurName = wifeSurName;
     }
 
-    public String getWifeGivenName() {
-        return wifeGivenName;
+    public String getWifeFirstName() {
+        return wifeFirstName;
     }
 
-    public void setWifeGivenName(String wifeGivenName) {
-        this.wifeGivenName = wifeGivenName;
+    public void setWifeFirstName(String wifeFirstName) {
+        this.wifeFirstName = wifeFirstName;
     }
 
     public String getWifePatronymicName() {

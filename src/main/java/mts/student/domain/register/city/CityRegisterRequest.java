@@ -10,7 +10,7 @@ import java.time.LocalDate;
 public class CityRegisterRequest {
 
     private String surName;
-    private String givenName;
+    private String firstName;
     private String patronymicName;
     // Поле, которое использует адаптер
     @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
@@ -24,8 +24,8 @@ public class CityRegisterRequest {
     }
 
     public CityRegisterRequest(Person person) {
-        surName = person.getSecondName();
-        givenName = person.getFirstName();
+        surName = person.getSurName();
+        firstName = person.getFirstName();
         patronymicName = person.getPatronymicName();
         dateOfBirth = person.getBirthDay();
         Adress adr = person.getAdress();
@@ -40,7 +40,7 @@ public class CityRegisterRequest {
     public String toJSON() {
         return "{" +
                 "surName:" + surName + '\n' +
-                ", givenName:" + givenName + '\n' +
+                ", firstName:" + firstName + '\n' +
                 ", patronymicName:" + patronymicName + '\n' +
                 ", dateOfBirth:" + dateOfBirth + '\n' +
                 ", streetCode:" + streetCode + '\n' +
@@ -54,7 +54,7 @@ public class CityRegisterRequest {
     public String toString() {
         return "BirthRegisterRequest{" +
                 "surName='" + surName + '\'' +
-                ", givenName='" + givenName + '\'' +
+                ", firstName='" + firstName + '\'' +
                 ", patronymicName='" + patronymicName + '\'' +
                 ", dateOfBirth=" + dateOfBirth +
                 ", streetCode=" + streetCode +
@@ -72,12 +72,12 @@ public class CityRegisterRequest {
         this.surName = surName;
     }
 
-    public String getGivenName() {
-        return givenName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setGivenName(String givenName) {
-        this.givenName = givenName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getPatronymicName() {

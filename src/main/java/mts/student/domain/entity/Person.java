@@ -15,9 +15,9 @@ public abstract class Person {
 
     }
 
-    public Person(String firstName, String secondName, String patronymicName, LocalDate bd) {
+    public Person(String firstName, String surName, String patronymicName, LocalDate bd) {
         this.firstName = firstName;
-        this.surName = secondName;
+        this.surName = surName;
         this.patronymicName = patronymicName;
         this.birthDay = bd;
     }
@@ -26,7 +26,7 @@ public abstract class Person {
     public String toString() {
         return "Person{" +
                 "firstName='" + firstName + '\'' +
-                ", secondName='" + surName + '\'' +
+                ", surName='" + surName + '\'' +
                 ", patronymicName='" + patronymicName + '\'' +
                 ", birthDay=" + birthDay +
                 ", adress=" + adress +
@@ -41,12 +41,12 @@ public abstract class Person {
         this.firstName = firstName;
     }
 
-    public String getSecondName() {
+    public String getSurName() {
         return surName;
     }
 
-    public void setSecondName(String secondName) {
-        this.surName = secondName;
+    public void setSurName(String surName) {
+        this.surName = surName;
     }
 
     public String getPatronymicName() {

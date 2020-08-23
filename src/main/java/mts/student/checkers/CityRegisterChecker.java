@@ -55,7 +55,7 @@ public class CityRegisterChecker {
                 if (checkPerson(child).isRegistered() == false) {
                     cityRegisterResult.setDecision(false);
                     cityRegisterResult.getError().append(child.getFirstName() + ' '
-                            + child.getSecondName()
+                            + child.getSurName()
                             + " not registered");
                 }
             }
