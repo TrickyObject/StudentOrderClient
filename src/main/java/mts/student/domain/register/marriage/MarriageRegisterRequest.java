@@ -30,13 +30,31 @@ public class MarriageRegisterRequest {
 
     private String marriageCertNumber;
     @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
-    private String marriageCertDate;
+    private LocalDate marriageCertDate;
 
     public MarriageRegisterRequest() {
     }
 
     public MarriageRegisterRequest(MarriageCertificate marriageCertificate) {
 
+        this.husbandFirstName = marriageCertificate.getHusbandFirstName();
+        this.husbandSurName = marriageCertificate.getHusbandSurName();
+        this.husbandPatronymicName = marriageCertificate.getHusbandPatronymicName();
+        this.husbandDateOfBirth = marriageCertificate.getHusbandDateOfBirth();
+        this.husbandPassportSerial = marriageCertificate.getHusbandPassportSerial();
+        this.husbandPassportNumber = marriageCertificate.getHusbandPassportNumber();
+        this.husbandPassportDate = marriageCertificate.getHusbandPassportDate();
+
+        this.wifeFirstName = marriageCertificate.getWifeFirstName();
+        this.wifeSurName = marriageCertificate.getWifeSurName();
+        this.wifePatronymicName = marriageCertificate.getWifePatronymicName();
+        this.wifeDateOfBirth = marriageCertificate.getWifeDateOfBirth();
+        this.wifePassportSerial = marriageCertificate.getWifePassportSerial();
+        this.wifePassportNumber = marriageCertificate.getWifePassportNumber();
+        this.wifePassportDate = marriageCertificate.getWifePassportDate();
+
+        this.marriageCertNumber = marriageCertificate.getMarriageCertNumber();
+        this.marriageCertDate = marriageCertificate.getMarriageCertDate();
     }
 
 
@@ -182,11 +200,11 @@ public class MarriageRegisterRequest {
         this.marriageCertNumber = marriageCertNumber;
     }
 
-    public String getMarriageCertDate() {
+    public LocalDate getMarriageCertDate() {
         return marriageCertDate;
     }
 
-    public void setMarriageCertDate(String marriageCertDate) {
+    public void setMarriageCertDate(LocalDate marriageCertDate) {
         this.marriageCertDate = marriageCertDate;
     }
 }
