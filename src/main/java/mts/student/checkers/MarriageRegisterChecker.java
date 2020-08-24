@@ -1,7 +1,7 @@
 package mts.student.checkers;
 
 import mts.student.config.Config;
-import mts.student.domain.entity.Person;
+import mts.student.domain.entity.MarriageCertificate;
 import mts.student.domain.entity.StudentOrder;
 
 import mts.student.domain.register.marriage.MarriageRegisterRequest;
@@ -19,20 +19,21 @@ import javax.ws.rs.core.MediaType;
 
 public class MarriageRegisterChecker {
 
-
     private static final Logger logger =
             LoggerFactory.getLogger(CityRegisterChecker.class);
 
     private StringBuilder answer;
 
     public MarriageRegisterResult marriageRegisterResult(StudentOrder so) {
-// TODO: переделать на MarriageCertificate
+
         MarriageRegisterResult marriageRegisterResult =  new MarriageRegisterResult();
 
         marriageRegisterResult.setDecision(false);
 
         try {
-            if (checkPerson(so.getHusband()).isMarried() != false) {
+            MarriageCertificate marriageCertificate = new MarriageCertificate(so);
+
+            if (checkMarriage(marriageCertificate).isMarried() != false) {
                 marriageRegisterResult.setDecision(true);
                 marriageRegisterResult.getError().append("Marriage registered");
             }
@@ -45,11 +46,11 @@ public class MarriageRegisterChecker {
     }
 
 
-    public MarriageRegisterResponse checkPerson(Person person)
+    public MarriageRegisterResponse checkMarriage(MarriageCertificate marriageCertificate)
             throws MarriageRegisterException {
 
         try {
-            MarriageRegisterRequest request = new MarriageRegisterRequest(person);
+            MarriageRegisterRequest request = new MarriageRegisterRequest(marriageCertificate);
 
             Client client = ClientBuilder.newClient();
             MarriageRegisterResponse response = client.target(

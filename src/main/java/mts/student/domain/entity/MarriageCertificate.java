@@ -1,12 +1,11 @@
-package mts.student.domain.register.marriage;
+package mts.student.domain.entity;
 
-import mts.student.domain.entity.MarriageCertificate;
 import mts.student.util.LocalDateAdapter;
 
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
 
-public class MarriageRegisterRequest {
+public class MarriageCertificate {
 
     private String husbandSurName;
     private String husbandFirstName;
@@ -30,36 +29,32 @@ public class MarriageRegisterRequest {
 
     private String marriageCertNumber;
     @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
-    private String marriageCertDate;
+    private LocalDate marriageCertDate;
 
-    public MarriageRegisterRequest() {
-    }
-
-    public MarriageRegisterRequest(MarriageCertificate marriageCertificate) {
-
+    public MarriageCertificate() {
     }
 
 
-    @Override
-    public String toString() {
-        return "MarriageRegisterRequest{" +
-                "husbandSurName='" + husbandSurName + '\'' +
-                ", husbandFirstName='" + husbandFirstName + '\'' +
-                ", husbandPatronymicName='" + husbandPatronymicName + '\'' +
-                ", husbandDateOfBirth=" + husbandDateOfBirth +
-                ", husbandPassportSerial='" + husbandPassportSerial + '\'' +
-                ", husbandPassportNumber='" + husbandPassportNumber + '\'' +
-                ", husbandPassportDate=" + husbandPassportDate +
-                ", wifeSurName='" + wifeSurName + '\'' +
-                ", wifeFirstName='" + wifeFirstName + '\'' +
-                ", wifePatronymicName='" + wifePatronymicName + '\'' +
-                ", wifeDateOfBirth=" + wifeDateOfBirth +
-                ", wifePassportSerial='" + wifePassportSerial + '\'' +
-                ", wifePassportNumber='" + wifePassportNumber + '\'' +
-                ", wifePassportDate=" + wifePassportDate +
-                ", marriageCertNumber='" + marriageCertNumber + '\'' +
-                ", marriageCertDate='" + marriageCertDate + '\'' +
-                '}';
+    public MarriageCertificate(StudentOrder so) {
+
+        this.husbandFirstName = so.getHusband().getFirstName();
+        this.husbandSurName = so.getHusband().getSurName();
+        this.husbandPatronymicName = so.getHusband().getPatronymicName();
+        this.husbandDateOfBirth = so.getHusband().getBirthDay();
+        this.husbandPassportSerial = so.getHusband().getPassportSerial();
+        this.husbandPassportNumber = so.getHusband().getPassportNum();
+        this.husbandPassportDate = so.getHusband().getPassportDate();
+
+        this.wifeFirstName = so.getWife().getFirstName();
+        this.wifeSurName = so.getWife().getSurName();
+        this.wifePatronymicName = so.getWife().getPatronymicName();
+        this.wifeDateOfBirth = so.getWife().getBirthDay();
+        this.wifePassportSerial = so.getWife().getPassportSerial();
+        this.wifePassportNumber = so.getWife().getPassportNum();
+        this.wifePassportDate = so.getWife().getPassportDate();
+
+        this.marriageCertNumber = so.getMarriageCertId();
+        this.marriageCertDate = so.getMarriageDate();
     }
 
     public String getHusbandSurName() {
@@ -182,11 +177,11 @@ public class MarriageRegisterRequest {
         this.marriageCertNumber = marriageCertNumber;
     }
 
-    public String getMarriageCertDate() {
+    public LocalDate getMarriageCertDate() {
         return marriageCertDate;
     }
 
-    public void setMarriageCertDate(String marriageCertDate) {
+    public void setMarriageCertDate(LocalDate marriageCertDate) {
         this.marriageCertDate = marriageCertDate;
     }
 }
