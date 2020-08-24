@@ -3,16 +3,11 @@ package mts.student.checkers;
 import mts.student.config.Config;
 import mts.student.domain.entity.BirthCertificate;
 import mts.student.domain.entity.Child;
-import mts.student.domain.entity.Person;
 import mts.student.domain.entity.StudentOrder;
 import mts.student.domain.register.birth.BirthRegisterRequest;
 import mts.student.domain.register.birth.BirthRegisterResponse;
 import mts.student.domain.register.birth.BirthRegisterResult;
-import mts.student.domain.register.marriage.MarriageRegisterRequest;
-import mts.student.domain.register.marriage.MarriageRegisterResponse;
-import mts.student.domain.register.marriage.MarriageRegisterResult;
 import mts.student.exception.BirthRegException;
-import mts.student.exception.MarriageRegisterException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,7 +24,7 @@ public class BirthRegisterChecker {
 
     private StringBuilder answer;
 
-    public BirthRegisterResult checkRegistration(StudentOrder so) {
+    public BirthRegisterResult checkBirthRegistration(StudentOrder so) {
 
         BirthRegisterResult birthRegisterResult =  new BirthRegisterResult();
 
@@ -41,7 +36,7 @@ public class BirthRegisterChecker {
                     new BirthCertificate(so.getHusband(), so.getWife(), child);
 
             try {
-                if (checkBirth(birthCertificate).isBorn() != false) {
+                if (checkBirthRegistration(birthCertificate).isBorn() != false) {
                     birthRegisterResult.setDecision(true);
                     birthRegisterResult.getError().append("Child registered");
                 }
@@ -56,7 +51,7 @@ public class BirthRegisterChecker {
     }
 
 
-    public BirthRegisterResponse checkBirth(BirthCertificate birthCertificate)
+    public BirthRegisterResponse checkBirthRegistration(BirthCertificate birthCertificate)
             throws BirthRegException {
 
         try {

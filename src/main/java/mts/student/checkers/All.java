@@ -17,14 +17,20 @@ public class All {
 
     private CityRegisterChecker cityRegisterChecker;
     private StudentRegisterChecker studentRegisterChecker;
+    private BirthRegisterChecker birthRegisterChecker;
+    private MarriageRegisterChecker marriageRegisterChecker;
 
     private boolean cityRegisterResult;
     private boolean studentRegisterResult;
     private boolean result;
 
     public All() {
+
         cityRegisterChecker = new CityRegisterChecker();
         studentRegisterChecker = new StudentRegisterChecker();
+        birthRegisterChecker = new BirthRegisterChecker();
+        marriageRegisterChecker = new MarriageRegisterChecker();
+
     }
 
     //обработка одной заявки
@@ -41,7 +47,10 @@ public class All {
     public boolean checkOneOrder(StudentOrder so) {
 
 //        cityRegisterResult = checkRegistration(so);
-        studentRegisterResult = checkStudying(so);
+//        studentRegisterResult = checkStudying(so);
+//        birthRegisterChecker = checkBirth(so);
+//        marriageRegisterChecker = checkStudying(so);
+
 
         if (studentRegisterResult) {
             return true;
@@ -54,7 +63,6 @@ public class All {
         return false;
     }
 
-    // проверка регистрации
     public boolean checkRegistration(StudentOrder so) {
         return cityRegisterChecker.checkRegistration(so).isDecision();
     }
@@ -63,8 +71,13 @@ public class All {
         return studentRegisterChecker.checkStudentRegistration(so).isDecision();
     }
 
+    public boolean checkBirth (StudentOrder so) {
+        return birthRegisterChecker.checkBirthRegistration(so).isDecision();
+    }
 
-
+    public boolean checkMarriage (StudentOrder so) {
+        return marriageRegisterChecker.checkMarriageRegistration(so).isDecision();
+    }
 
 
 

@@ -24,7 +24,7 @@ public class MarriageRegisterChecker {
 
     private StringBuilder answer;
 
-    public MarriageRegisterResult marriageRegisterResult(StudentOrder so) {
+    public MarriageRegisterResult checkMarriageRegistration(StudentOrder so) {
 
         MarriageRegisterResult marriageRegisterResult =  new MarriageRegisterResult();
 
@@ -33,7 +33,7 @@ public class MarriageRegisterChecker {
         try {
             MarriageCertificate marriageCertificate = new MarriageCertificate(so);
 
-            if (checkMarriage(marriageCertificate).isMarried() != false) {
+            if (checkMarriageRegistration(marriageCertificate).isMarried() != false) {
                 marriageRegisterResult.setDecision(true);
                 marriageRegisterResult.getError().append("Marriage registered");
             }
@@ -46,7 +46,7 @@ public class MarriageRegisterChecker {
     }
 
 
-    public MarriageRegisterResponse checkMarriage(MarriageCertificate marriageCertificate)
+    public MarriageRegisterResponse checkMarriageRegistration(MarriageCertificate marriageCertificate)
             throws MarriageRegisterException {
 
         try {
