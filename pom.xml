@@ -37,32 +37,29 @@
             <version>42.2.8</version>
         </dependency>
 
-        <!-- логгер и ео адаптер -->
+        <!-- логгер и его провайдеры start-->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>${slf4j.version}</version>
         </dependency>
-
-        <!--         <dependency>-->
-        <!--             <groupId>org.slf4j</groupId>-->
-        <!--             <artifactId>slf4j-simple</artifactId>-->
-        <!--             <version>${slf4j.version}</version>-->
-        <!--             <scope>test</scope>-->
-        <!--         </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.apache.logging.log4j</groupId>-->
+<!--            <artifactId>log4j-core</artifactId>-->
+<!--            <version>${log4j.version}</version>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
+            <artifactId>slf4j-simple</artifactId>
             <version>${slf4j.version}</version>
-            <scope>test</scope>
         </dependency>
-
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>${log4j.version}</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.slf4j</groupId>-->
+<!--            <artifactId>slf4j-log4j12</artifactId>-->
+<!--            <version>${slf4j.version}</version>-->
+<!--        </dependency>-->
+        <!-- логгер и его провайдеры end-->
 
         <!-- помгает с адаптером даты -->
         <dependency>

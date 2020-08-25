@@ -22,6 +22,8 @@ public class All {
 
     private boolean cityRegisterResult;
     private boolean studentRegisterResult;
+    private boolean birthRegisterResult;
+    private boolean marriageRegisterResult;
     private boolean result;
 
     public All() {
@@ -48,11 +50,11 @@ public class All {
 
 //        cityRegisterResult = checkRegistration(so);
 //        studentRegisterResult = checkStudying(so);
-//        birthRegisterChecker = checkBirth(so);
-//        marriageRegisterChecker = checkStudying(so);
+//        birthRegisterResult = checkBirth(so);
+        marriageRegisterResult = checkMarriage(so);
 
 
-        if (studentRegisterResult) {
+        if (marriageRegisterResult) {
             return true;
         }
 

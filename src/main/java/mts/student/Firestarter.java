@@ -1,9 +1,12 @@
 package mts.student;
 
 import mts.student.checkers.All;
+import mts.student.checkers.CityRegisterChecker;
 import mts.student.dao.StudentOrderDaoImpl;
 import mts.student.domain.entity.StudentOrder;
 import mts.student.exception.DaoException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -17,6 +20,9 @@ import java.util.List;
 
 public class Firestarter {
 
+    private static final Logger logger =
+            LoggerFactory.getLogger(Firestarter.class);
+
     private All all;
 
     public Firestarter() {
@@ -25,8 +31,12 @@ public class Firestarter {
 
     public static void main(String[] args) {
 
+        logger.info("Main");
+
         Firestarter firestarter = new Firestarter();
+
         firestarter.checkAll();
+
 
     }
 
@@ -35,7 +45,10 @@ public class Firestarter {
 
         try {
             List <StudentOrder> soList = readStudentOrders();
+
             for(StudentOrder so : soList) {
+                logger.info("SO" + so.toString());
+
                 checkOneOrder(so);
             }
         } catch (DaoException e) {

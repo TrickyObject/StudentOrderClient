@@ -34,7 +34,7 @@ public class MakeStudentOrder {
 
         // Муж
         Adult husband = new Adult(
-                "Васильев", "Павел", "Николаевич",
+                "Павел", "Васильев", "Николаевич",
                 LocalDate.of(1995, 3, 18));
         husband.setPassportSerial("1234");
         husband.setPassportNum("123456");
@@ -49,7 +49,7 @@ public class MakeStudentOrder {
 
         // Жена
         Adult wife = new Adult(
-                "Васильева", "Ирина", "Петровна",
+                "Ирина", "Васильева", "Петровна",
                 LocalDate.of(1997, 4, 5));
         wife.setPassportSerial("4321");
         wife.setPassportNum("654321");

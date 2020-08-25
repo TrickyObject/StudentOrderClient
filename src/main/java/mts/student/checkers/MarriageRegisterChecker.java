@@ -26,6 +26,8 @@ public class MarriageRegisterChecker {
 
     public MarriageRegisterResult checkMarriageRegistration(StudentOrder so) {
 
+        logger.info("checkMarriageRegistration");
+
         MarriageRegisterResult marriageRegisterResult =  new MarriageRegisterResult();
 
         marriageRegisterResult.setDecision(false);
@@ -36,11 +38,14 @@ public class MarriageRegisterChecker {
             if (checkMarriageRegistration(marriageCertificate).isMarried() != false) {
                 marriageRegisterResult.setDecision(true);
                 marriageRegisterResult.getError().append("Marriage registered");
+                logger.info("Marriage registered");
             }
 
         } catch (MarriageRegisterException e) {
             e.printStackTrace();
         }
+
+        logger.info("marriageRegisterResult = " + marriageRegisterResult.isDecision());
 
         return marriageRegisterResult;
     }
@@ -49,8 +54,12 @@ public class MarriageRegisterChecker {
     public MarriageRegisterResponse checkMarriageRegistration(MarriageCertificate marriageCertificate)
             throws MarriageRegisterException {
 
+        logger.info("checkMarriageRegistration");
+
         try {
             MarriageRegisterRequest request = new MarriageRegisterRequest(marriageCertificate);
+
+            logger.info("Try send marriage cert");
 
             Client client = ClientBuilder.newClient();
             MarriageRegisterResponse response = client.target(
@@ -59,6 +68,10 @@ public class MarriageRegisterChecker {
                     .header(HttpHeaders.ACCEPT_CHARSET, "UTF-8")
                     .post(Entity.entity(request, MediaType.APPLICATION_JSON))
                     .readEntity(MarriageRegisterResponse.class);
+
+            logger.info("request = " + request.toString());
+
+            logger.info("Response = " + response.isMarried());
 
             return response;
         } catch (Exception e) {
