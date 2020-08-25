@@ -65,6 +65,8 @@ public class StudentRegisterChecker {
                     .post(Entity.entity(request, MediaType.APPLICATION_JSON))
                     .readEntity(StudentRegisterResponse.class);
 
+            logger.info(request.toString());
+
             return response;
         } catch (Exception e) {
             // TODO: refactor

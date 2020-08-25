@@ -65,6 +65,8 @@ public class BirthRegisterChecker {
                     .post(Entity.entity(request, MediaType.APPLICATION_JSON))
                     .readEntity(BirthRegisterResponse.class);
 
+            logger.info("request = " + request.toString());
+
             return response;
         } catch (Exception e) {
             throw new BirthRegException("410", e.getMessage(), e);

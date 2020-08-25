@@ -37,7 +37,6 @@ public class Firestarter {
 
         firestarter.checkAll();
 
-
     }
 
     // получение всех заявок и их проверка
