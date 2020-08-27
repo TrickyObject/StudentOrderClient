@@ -40,6 +40,9 @@ public class CityRegisterChecker {
         cityRegisterResult.setDecision(false);
 
         try {
+
+            logger.info(so.getHusband().toString());
+
             if (checkPerson(so.getHusband()).isRegistered() == false) {
                 cityRegisterResult.setDecision(false);
                 cityRegisterResult.getError().append("Husband not registered");
@@ -72,6 +75,8 @@ public class CityRegisterChecker {
 
         try {
             CityRegisterRequest request = new CityRegisterRequest(person);
+
+            logger.info("REQUEST: " + request.toString());
 
             Client client = ClientBuilder.newClient();
             CityRegisterResponse response = client.target(

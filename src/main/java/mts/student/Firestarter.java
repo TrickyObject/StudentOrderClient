@@ -1,7 +1,6 @@
 package mts.student;
 
 import mts.student.checkers.All;
-import mts.student.checkers.CityRegisterChecker;
 import mts.student.dao.StudentOrderDaoImpl;
 import mts.student.domain.entity.StudentOrder;
 import mts.student.exception.DaoException;

@@ -37,19 +37,6 @@ public class CityRegisterRequest {
     }
 
 
-    public String toJSON() {
-        return "{" +
-                "surName:" + surName + '\n' +
-                ", firstName:" + firstName + '\n' +
-                ", patronymicName:" + patronymicName + '\n' +
-                ", dateOfBirth:" + dateOfBirth + '\n' +
-                ", streetCode:" + streetCode + '\n' +
-                ", building:" + building + '\n' +
-                ", extension:" + extension + '\n' +
-                ", apartment:" + apartment + '\n' +
-                '}';
-    }
-
     @Override
     public String toString() {
         return "BirthRegisterRequest{" +

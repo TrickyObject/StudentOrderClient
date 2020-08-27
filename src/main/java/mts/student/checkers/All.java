@@ -48,20 +48,20 @@ public class All {
     // Проверка во всех структурах
     public boolean checkOneOrder(StudentOrder so) {
 
-//        OK
+//        NOT OK
 //        cityRegisterResult = checkRegistration(so);
 
-//        OK
-        studentRegisterResult = checkStudying(so);
+//        NOT OK
+//        studentRegisterResult = checkStudying(so);
 
 //        OK
 //        birthRegisterResult = checkBirth(so);
 
 //        OK
-//        marriageRegisterResult = checkMarriage(so);
+        marriageRegisterResult = checkMarriage(so);
 
 
-        if (birthRegisterResult) {
+        if (marriageRegisterResult) {
             return true;
         }
 

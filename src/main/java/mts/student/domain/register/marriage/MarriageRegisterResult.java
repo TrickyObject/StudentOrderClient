@@ -6,7 +6,7 @@ public class MarriageRegisterResult {
     private StringBuilder error;
 
     public MarriageRegisterResult() {
-        StringBuilder error = new StringBuilder("");
+        this.error = new StringBuilder("");
     }
 
     @Override

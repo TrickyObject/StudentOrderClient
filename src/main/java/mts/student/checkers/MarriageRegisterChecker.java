@@ -35,7 +35,7 @@ public class MarriageRegisterChecker {
         try {
             MarriageCertificate marriageCertificate = new MarriageCertificate(so);
 
-            if (checkMarriageRegistration(marriageCertificate).isMarried() != false) {
+            if (checkMarriageRegistration(marriageCertificate).isMarried() == true) {
                 marriageRegisterResult.setDecision(true);
                 marriageRegisterResult.getError().append("Marriage registered");
                 logger.info("Marriage registered");
@@ -69,7 +69,7 @@ public class MarriageRegisterChecker {
                     .post(Entity.entity(request, MediaType.APPLICATION_JSON))
                     .readEntity(MarriageRegisterResponse.class);
 
-            logger.info("request = " + request.toString());
+            logger.info("Request = " + request.toString());
 
             logger.info("Response = " + response.isMarried());
 
