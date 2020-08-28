@@ -49,19 +49,19 @@ public class All {
     public boolean checkOneOrder(StudentOrder so) {
 
 //        NOT OK
-//        cityRegisterResult = checkRegistration(so);
+        cityRegisterResult = checkRegistration(so);
 
-//        NOT OK
+//      GOOD
 //        studentRegisterResult = checkStudying(so);
 
-//        OK
+//      GOOD
 //        birthRegisterResult = checkBirth(so);
 
-//        OK
-        marriageRegisterResult = checkMarriage(so);
+//      GOOD
+//        marriageRegisterResult = checkMarriage(so);
 
 
-        if (marriageRegisterResult) {
+        if (cityRegisterResult) {
             return true;
         }
 

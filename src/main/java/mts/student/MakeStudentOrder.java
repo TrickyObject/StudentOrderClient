@@ -64,7 +64,7 @@ public class MakeStudentOrder {
 
         // ребёнок
         Child child1 = new Child(
-                "Васильева", "Александр", "Павлович",
+                "Васильев", "Александр", "Павлович",
                 LocalDate.of(2015,1,11));
         child1.setCertNum("456123");
         child1.setIssueDate(LocalDate.of(2015, 1, 21));

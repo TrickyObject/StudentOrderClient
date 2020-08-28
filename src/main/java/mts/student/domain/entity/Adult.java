@@ -1,11 +1,15 @@
 package mts.student.domain.entity;
 
+import mts.student.util.LocalDateAdapter;
+
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
 
 public class Adult extends Person {
 
     private String passportSerial;
     private String passportNum;
+    @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
     private LocalDate passportDate;
     private PassportOffice passportOffice;
     private University uni;

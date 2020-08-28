@@ -6,7 +6,7 @@ public class BirthRegisterResult {
     private StringBuilder error;
 
     public BirthRegisterResult() {
-        StringBuilder error = new StringBuilder("");
+        this.error = new StringBuilder("");
     }
 
     @Override

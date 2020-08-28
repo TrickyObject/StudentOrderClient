@@ -36,6 +36,7 @@ public class BirthRegisterChecker {
                     new BirthCertificate(so.getHusband(), so.getWife(), child);
 
             try {
+
                 if (checkBirthRegistration(birthCertificate).isBorn() != false) {
                     birthRegisterResult.setDecision(true);
                     birthRegisterResult.getError().append("Child registered");

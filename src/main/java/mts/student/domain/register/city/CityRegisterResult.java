@@ -6,7 +6,7 @@ public class CityRegisterResult {
     private StringBuilder error;
 
     public CityRegisterResult() {
-        StringBuilder error = new StringBuilder("");
+        this.error = new StringBuilder("");
     }
 
     @Override
