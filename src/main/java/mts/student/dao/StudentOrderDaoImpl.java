@@ -168,7 +168,7 @@ public class StudentOrderDaoImpl implements StudentOrderDao {
         ps.setString(start, adultAdress.getPostCode());
         ps.setLong(start + 1, adultAdress.getStreet().getStreet_code());
         ps.setString(start + 2, adultAdress.getBuilding());
-        ps.setString(start + 3, "");
+        ps.setString(start + 3, adultAdress.getExtension());
         ps.setString(start + 4, adultAdress.getApartment());
     }
 
@@ -202,7 +202,7 @@ public class StudentOrderDaoImpl implements StudentOrderDao {
         adress.setStreet(street);
         adress.setPostCode(rs.getString("c_post_index"));
         adress.setBuilding(rs.getString("c_building"));
-        adress.setBuilding(rs.getString("c_extension"));
+        adress.setExtension(rs.getString("c_extension"));
         adress.setApartment(rs.getString("c_apartment"));
         child.setAdress(adress);
 
@@ -351,7 +351,7 @@ public class StudentOrderDaoImpl implements StudentOrderDao {
         adress.setStreet(street);
         adress.setPostCode(rs.getString(prefix + "post_index"));
         adress.setBuilding(rs.getString(prefix + "building"));
-        adress.setBuilding(rs.getString(prefix + "extension"));
+        adress.setExtension(rs.getString(prefix + "extension"));
         adress.setApartment(rs.getString(prefix + "apartment"));
         adult.setAdress(adress);
 

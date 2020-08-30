@@ -39,7 +39,7 @@ public class CityRegisterRequest {
 
     @Override
     public String toString() {
-        return "BirthRegisterRequest{" +
+        return "CityRegisterRequest{" +
                 "surName='" + surName + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", patronymicName='" + patronymicName + '\'' +

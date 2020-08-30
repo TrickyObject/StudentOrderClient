@@ -30,7 +30,7 @@ public class MakeStudentOrder {
 
         Street street = new Street(6L, "Кирова");
 
-        Adress adress = new Adress("195000", street, "10", "2", "141");
+        Adress adress = new Adress("195000", street, "10", "", "141");
 
         // Муж
         Adult husband = new Adult(

@@ -45,7 +45,7 @@ public class Firestarter {
             List <StudentOrder> soList = readStudentOrders();
 
             for(StudentOrder so : soList) {
-                logger.info("SO" + so.toString());
+                logger.info("SO: " + so.toString());
 
                 checkOneOrder(so);
             }
